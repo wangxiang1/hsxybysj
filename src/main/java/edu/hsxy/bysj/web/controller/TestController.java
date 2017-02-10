@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
 
 	@RequestMapping("/")
-	public String test() {
-		return "test";
+	public String test11() {
+		return "login";
 	}
 }

@@ -23,4 +23,5 @@ public class ApplicationConfigurerAdapter extends WebMvcConfigurerAdapter {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+
 }
