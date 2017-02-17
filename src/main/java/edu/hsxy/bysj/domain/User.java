@@ -46,6 +46,20 @@ public class User {
 	 */
 	private String sjhm;
 
+	public User() {
+		super();
+	}
+
+	public User(String dlzh, String yhm, String pwd, String sfbz, String zcsj, String sjhm) {
+		super();
+		this.dlzh = dlzh;
+		this.yhm = yhm;
+		this.pwd = pwd;
+		this.sfbz = sfbz;
+		this.zcsj = zcsj;
+		this.sjhm = sjhm;
+	}
+
 	public int getYhid() {
 		return yhid;
 	}

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
     pageEncoding="UTF-8"%>
 <%String path = request.getContextPath();%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,7 +15,7 @@
     $('.loginbox').css({'position':'absolute','left':($(window).width()-692)/2});
 	$(window).resize(function(){  
     $('.loginbox').css({'position':'absolute','left':($(window).width()-692)/2});
-    })  
+    })   
 });  
 </script> 
 </head>
@@ -47,16 +47,12 @@
     <div class="loginbm">版权所有  2017  uimaker.com 仅供学习交流，勿用于任何商业用途</div>
     
 <script type="text/javascript">
-$(function(){
-})
 
 function loginXt(){
 	var dlzh = $("#dlzh").val();
 	var pwd = $("#pwd").val();
 	if (checkDlzh(dlzh) && checkPwd(pwd)) {
-		window.location="<%=path%>/login/login"
-	} else {
-
+		goLogin(dlzh,pwd);
 	}
 }
 
@@ -76,6 +72,27 @@ function checkPwd(pwd){
 	return true;
 }
 
+function goLogin(dlzh,pwd){
+	 $.ajax({
+	       type:"POST",
+	       url:"<%=path%>/hsxy/sdjf/login",
+	       data:{
+	    	     "dlzh":dlzh,
+	    	     "pwd":pwd
+			     },
+	       success:function(data){
+	    	   if (data) {
+				 location = "<%=path %>/hsxy/sdjf/gostu";
+			   }else{
+				   alert("密码或学号输入错误！")
+			   }
+	       },
+           error: function() {
+               //请求出错
+               alert("请求出错");
+           }
+		   });
+}
 </script>
 
 </body>

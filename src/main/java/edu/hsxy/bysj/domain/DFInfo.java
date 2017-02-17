@@ -22,11 +22,7 @@ public class DFInfo {
 	/**
 	 * 宿舍id
 	 */
-	private String ssid;
-	/**
-	 * 宿舍管理员id
-	 */
-	private String ssglyid;
+	private int ssid;
 	/**
 	 * 日期
 	 */
@@ -64,6 +60,25 @@ public class DFInfo {
 	 */
 	private String cbry;
 
+	public DFInfo() {
+		super();
+	}
+
+	public DFInfo(int ssid, String date, String ydlx, String ydl, String dfdj, String df, String sfjf, String dbqm,
+			String dbzm, String cbry) {
+		super();
+		this.ssid = ssid;
+		this.date = date;
+		this.ydlx = ydlx;
+		this.ydl = ydl;
+		this.dfdj = dfdj;
+		this.df = df;
+		this.sfjf = sfjf;
+		this.dbqm = dbqm;
+		this.dbzm = dbzm;
+		this.cbry = cbry;
+	}
+
 	public int getDfid() {
 		return dfid;
 	}
@@ -72,20 +87,12 @@ public class DFInfo {
 		this.dfid = dfid;
 	}
 
-	public String getSsid() {
+	public int getSsid() {
 		return ssid;
 	}
 
-	public void setSsid(String ssid) {
+	public void setSsid(int ssid) {
 		this.ssid = ssid;
-	}
-
-	public String getSsglyid() {
-		return ssglyid;
-	}
-
-	public void setSsglyid(String ssglyid) {
-		this.ssglyid = ssglyid;
 	}
 
 	public String getDate() {
@@ -162,9 +169,9 @@ public class DFInfo {
 
 	@Override
 	public String toString() {
-		return "DFInfo [dfid=" + dfid + ", ssid=" + ssid + ", ssglyid=" + ssglyid + ", date=" + date + ", ydlx=" + ydlx
-				+ ", ydl=" + ydl + ", dfdj=" + dfdj + ", df=" + df + ", sfjf=" + sfjf + ", dbqm=" + dbqm + ", dbzm="
-				+ dbzm + ", cbry=" + cbry + "]";
+		return "DFInfo [dfid=" + dfid + ", ssid=" + ssid + ", date=" + date + ", ydlx=" + ydlx + ", ydl=" + ydl
+				+ ", dfdj=" + dfdj + ", df=" + df + ", sfjf=" + sfjf + ", dbqm=" + dbqm + ", dbzm=" + dbzm + ", cbry="
+				+ cbry + "]";
 	}
 
 }

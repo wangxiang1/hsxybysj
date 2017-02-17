@@ -2,8 +2,6 @@ package edu.hsxy.bysj.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,13 +15,9 @@ import javax.persistence.Table;
 public class StuInfo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "stuid", nullable = false)
 	private int stuid;
-	/**
-	 * 登录账号
-	 */
-	private String dlzh;
+
 	/**
 	 * 学生性别
 	 */
@@ -33,6 +27,10 @@ public class StuInfo {
 	 */
 	private String xb;
 	/**
+	 * 学历（0：本科 1：专科）
+	 */
+	private String xl;
+	/**
 	 * 学生专业
 	 */
 	private String zy;
@@ -41,20 +39,26 @@ public class StuInfo {
 	 */
 	private String ssh;
 
+	public StuInfo() {
+		super();
+	}
+
+	public StuInfo(int stuid, int sex, String xb, String xl, String zy, String ssh) {
+		super();
+		this.stuid = stuid;
+		this.sex = sex;
+		this.xb = xb;
+		this.xl = xl;
+		this.zy = zy;
+		this.ssh = ssh;
+	}
+
 	public int getStuid() {
 		return stuid;
 	}
 
 	public void setStuid(int stuid) {
 		this.stuid = stuid;
-	}
-
-	public String getDlzh() {
-		return dlzh;
-	}
-
-	public void setDlzh(String dlzh) {
-		this.dlzh = dlzh;
 	}
 
 	public int getSex() {
@@ -89,10 +93,18 @@ public class StuInfo {
 		this.ssh = ssh;
 	}
 
+	public String getXl() {
+		return xl;
+	}
+
+	public void setXl(String xl) {
+		this.xl = xl;
+	}
+
 	@Override
 	public String toString() {
-		return "StuInfo [stuid=" + stuid + ", dlzh=" + dlzh + ", sex=" + sex + ", xb=" + xb + ", zy=" + zy + ", ssh="
-				+ ssh + "]";
+		return "StuInfo [stuid=" + stuid + ", sex=" + sex + ", xb=" + xb + ", xl=" + xl + ", zy=" + zy + ", ssh=" + ssh
+				+ "]";
 	}
 
 }

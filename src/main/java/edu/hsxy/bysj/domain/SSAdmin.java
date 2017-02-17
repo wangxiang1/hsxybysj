@@ -24,9 +24,20 @@ public class SSAdmin {
 	 */
 	private String sex;
 	/**
-	 * 宿舍楼id
+	 * 宿舍楼号
 	 */
-	private String sslid;
+	private String sslh;
+
+	public SSAdmin() {
+		super();
+	}
+
+	public SSAdmin(int ssglyid, String sex, String sslh) {
+		super();
+		this.ssglyid = ssglyid;
+		this.sex = sex;
+		this.sslh = sslh;
+	}
 
 	public int getSsglyid() {
 		return ssglyid;
@@ -44,17 +55,17 @@ public class SSAdmin {
 		this.sex = sex;
 	}
 
-	public String getSslid() {
-		return sslid;
+	public String getSslh() {
+		return sslh;
 	}
 
-	public void setSslid(String sslid) {
-		this.sslid = sslid;
+	public void setSslh(String sslh) {
+		this.sslh = sslh;
 	}
 
 	@Override
 	public String toString() {
-		return "SSAdmin [ssglyid=" + ssglyid + ", sex=" + sex + ", sslid=" + sslid + "]";
+		return "SSAdmin [ssglyid=" + ssglyid + ", sex=" + sex + ", sslh=" + sslh + "]";
 	}
 
 }

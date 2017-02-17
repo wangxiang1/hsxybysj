@@ -22,11 +22,7 @@ public class SFInfo {
 	/**
 	 * 宿舍id
 	 */
-	private String ssid;
-	/**
-	 * 宿舍管理员id
-	 */
-	private String ssglyid;
+	private int ssid;
 	/**
 	 * 日期
 	 */
@@ -64,6 +60,25 @@ public class SFInfo {
 	 */
 	private String cbry;
 
+	public SFInfo() {
+		super();
+	}
+
+	public SFInfo(int ssid, String date, String yslx, String ysl, String sfdj, String sf, String sfjf, String sbqm,
+			String sbzm, String cbry) {
+		super();
+		this.ssid = ssid;
+		this.date = date;
+		this.yslx = yslx;
+		this.ysl = ysl;
+		this.sfdj = sfdj;
+		this.sf = sf;
+		this.sfjf = sfjf;
+		this.sbqm = sbqm;
+		this.sbzm = sbzm;
+		this.cbry = cbry;
+	}
+
 	public int getSfid() {
 		return sfid;
 	}
@@ -72,20 +87,12 @@ public class SFInfo {
 		this.sfid = sfid;
 	}
 
-	public String getSsid() {
+	public int getSsid() {
 		return ssid;
 	}
 
-	public void setSsid(String ssid) {
+	public void setSsid(int ssid) {
 		this.ssid = ssid;
-	}
-
-	public String getSsglyid() {
-		return ssglyid;
-	}
-
-	public void setSsglyid(String ssglyid) {
-		this.ssglyid = ssglyid;
 	}
 
 	public String getDate() {
@@ -162,9 +169,9 @@ public class SFInfo {
 
 	@Override
 	public String toString() {
-		return "SFInfo [sfid=" + sfid + ", ssid=" + ssid + ", ssglyid=" + ssglyid + ", date=" + date + ", yslx=" + yslx
-				+ ", ysl=" + ysl + ", sfdj=" + sfdj + ", sf=" + sf + ", sfjf=" + sfjf + ", sbqm=" + sbqm + ", sbzm="
-				+ sbzm + ", cbry=" + cbry + "]";
+		return "SFInfo [sfid=" + sfid + ", ssid=" + ssid + ", date=" + date + ", yslx=" + yslx + ", ysl=" + ysl
+				+ ", sfdj=" + sfdj + ", sf=" + sf + ", sfjf=" + sfjf + ", sbqm=" + sbqm + ", sbzm=" + sbzm + ", cbry="
+				+ cbry + "]";
 	}
 
 }
