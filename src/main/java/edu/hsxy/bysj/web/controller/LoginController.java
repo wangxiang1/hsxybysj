@@ -17,6 +17,7 @@ public class LoginController {
 
 	@Autowired
 	private UserRepository userRepository;
+
 	/*
 	 * @Autowired private SfRepository sfRepository;
 	 * 
@@ -25,17 +26,19 @@ public class LoginController {
 
 	@RequestMapping("/")
 	public String goLogin() {
+
 		/*
-		 * SFInfo sfInfo = new SFInfo(3, "2017-02-16 22:14:32", "0", "10",
-		 * "2.35", "23.5", "1", "100", "110", "1"); SFInfo sfInfo1 = new
-		 * SFInfo(4, "2017-02-16 22:14:32", "0", "100", "2.35", "235", "1",
-		 * "200", "300", "1"); DFInfo dfInfo = new DFInfo(3,
-		 * "2017-02-16 22:14:32", "0", "10", "0.52", "5.2", "1", "100", "110",
-		 * "1"); DFInfo dfInfo1 = new DFInfo(4, "2017-02-16 22:14:32", "0",
-		 * "100", "0.52", "52", "1", "200", "300", "1");
+		 * SFInfo sfInfo = new SFInfo(3, "2017-06-16 22:14:32", "0", "10",
+		 * "2.35", "23.5", "1", "140", "150", "1"); SFInfo sfInfo1 = new
+		 * SFInfo(4, "2017-06-16 22:14:32", "0", "100", "2.35", "235", "1",
+		 * "600", "700", "1"); DFInfo dfInfo = new DFInfo(3,
+		 * "2017-06-16 22:14:32", "0", "10", "0.52", "5.2", "1", "140", "150",
+		 * "1"); DFInfo dfInfo1 = new DFInfo(4, "2017-06-16 22:14:32", "0",
+		 * "100", "0.52", "52", "1", "600", "700", "1");
 		 * sfRepository.save(sfInfo); sfRepository.save(sfInfo1);
 		 * dfRepository.save(dfInfo); dfRepository.save(dfInfo1);
 		 */
+
 		return "login";
 	}
 

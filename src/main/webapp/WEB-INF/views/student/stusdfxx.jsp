@@ -25,7 +25,7 @@
     <li>首页</li>
     <li>水电费信息</li>
     </ul>
-    </div>
+ </div>
     
     <div class="rightinfo">
         <div><span style="font-size: 20px; position:relative; left: 45%; margin: 15px;">水电费信息</span></div>

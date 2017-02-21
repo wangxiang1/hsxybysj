@@ -5,8 +5,9 @@ public class Sdfxx {
 	private int ssid;
 	private String sslh;
 	private String ssh;
-	private String ssye;
+	private double ssye;
 
+	private int sfid;
 	private String yslx;
 	private String ysl;
 	private String sfdj;
@@ -18,6 +19,7 @@ public class Sdfxx {
 
 	private String date;
 
+	private int dfid;
 	private String ydlx;
 	private String ydl;
 	private String dfdj;
@@ -26,6 +28,8 @@ public class Sdfxx {
 	private String dbqm;
 	private String dbzm;
 	private String dcbry;
+
+	private double zj;
 
 	public String getSslh() {
 		return sslh;
@@ -43,11 +47,11 @@ public class Sdfxx {
 		this.ssh = ssh;
 	}
 
-	public String getSsye() {
+	public double getSsye() {
 		return ssye;
 	}
 
-	public void setSsye(String ssye) {
+	public void setSsye(double ssye) {
 		this.ssye = ssye;
 	}
 
@@ -187,20 +191,45 @@ public class Sdfxx {
 		this.dcbry = dcbry;
 	}
 
-	@Override
-	public String toString() {
-		return "sdfxx [sslh=" + sslh + ", ssh=" + ssh + ", ssye=" + ssye + ", yslx=" + yslx + ", ysl=" + ysl + ", sfdj="
-				+ sfdj + ", sf=" + sf + ", ssfjf=" + ssfjf + ", sbqm=" + sbqm + ", sbzm=" + sbzm + ", scbry=" + scbry
-				+ ", date=" + date + ", ydlx=" + ydlx + ", ydl=" + ydl + ", dfdj=" + dfdj + ", df=" + df + ", dsfjf="
-				+ dsfjf + ", dbqm=" + dbqm + ", dbzm=" + dbzm + ", dcbry=" + dcbry + "]";
-	}
-
 	public int getSsid() {
 		return ssid;
 	}
 
 	public void setSsid(int ssid) {
 		this.ssid = ssid;
+	}
+
+	public int getSfid() {
+		return sfid;
+	}
+
+	public void setSfid(int sfid) {
+		this.sfid = sfid;
+	}
+
+	public int getDfid() {
+		return dfid;
+	}
+
+	public void setDfid(int dfid) {
+		this.dfid = dfid;
+	}
+
+	public double getZj() {
+		return zj;
+	}
+
+	public void setZj(double zj) {
+		this.zj = zj;
+	}
+
+	@Override
+	public String toString() {
+		return "Sdfxx [ssid=" + ssid + ", sslh=" + sslh + ", ssh=" + ssh + ", ssye=" + ssye + ", sfid=" + sfid
+				+ ", yslx=" + yslx + ", ysl=" + ysl + ", sfdj=" + sfdj + ", sf=" + sf + ", ssfjf=" + ssfjf + ", sbqm="
+				+ sbqm + ", sbzm=" + sbzm + ", scbry=" + scbry + ", date=" + date + ", dfid=" + dfid + ", ydlx=" + ydlx
+				+ ", ydl=" + ydl + ", dfdj=" + dfdj + ", df=" + df + ", dsfjf=" + dsfjf + ", dbqm=" + dbqm + ", dbzm="
+				+ dbzm + ", dcbry=" + dcbry + ", zj=" + zj + "]";
 	}
 
 }
