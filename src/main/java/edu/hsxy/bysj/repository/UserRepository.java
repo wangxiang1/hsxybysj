@@ -18,4 +18,5 @@ public interface UserRepository extends CrudRepository<User, Serializable> {
 	@Modifying
 	@Query("update User u set u.pwd = ?2 where u.yhid = ?1")
 	int updatePwd(int yhid, String pwd);
+
 }

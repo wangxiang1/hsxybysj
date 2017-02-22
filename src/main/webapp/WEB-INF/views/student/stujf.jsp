@@ -29,6 +29,22 @@
     
     <div class="rightinfo">
         <div><span style="font-size: 20px; position:relative; left: 42%; margin: 15px;">宿舍水电缴费</span></div>
+        <div class="chaxun" style="position : relative; margin-bottom: 5px; left: 55%; ">
+            <div style="position:relative; float: left;"><label style="font-size: 14px;">时间：</label></div>
+            <div style="position:relative; float: left; border-radius:2px; border: solid 1px black; margin-right: 10px;">
+            <select id="date">
+				<c:forEach items="${dates }" var="d">
+				<c:if test="${d.substring(0, 19) == sdfxx.date }">
+					<option selected="selected" value="${d.substring(0, 19) }">${d.substring(0, 11) }</option>
+				</c:if>
+				<c:if test="${d.substring(0, 19) != sdfxx.date }">
+					<option value="${d.substring(0, 19) }">${d.substring(0, 11) }</option>
+				</c:if>
+				</c:forEach>
+			</select>
+			</div>
+            <button class="btn-xs btn-primary" onclick="chaxun()">查询</button>
+        </div>
 	    <table class="tablelist" style="position:relative; width: 700px; left: 20%;">
 	    	<tr>
 	    	   <td class="wz">宿舍楼号</td>
@@ -140,7 +156,11 @@
             }
  		   });
     }
-    
+    function chaxun(){
+		var stuid = "${user.yhid }";
+		var date = $("#date").val();
+		location = "<%=path %>/hsxy/sdjf/gostujf?stuid="+stuid+"&date="+date;
+	}
     </script>
 </body>
 </html>

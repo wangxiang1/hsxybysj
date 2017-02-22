@@ -1,32 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
     pageEncoding="UTF-8"%>
 <%String path = request.getContextPath();%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="<%=path %>/js/model/css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="<%=path %>/js/model/js/jquery.js"></script>
-<script src="<%=path %>/js/model/js/cloud.js" type="text/javascript"></script>
-<script src="<%=path %>/js/jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="<%=path %>/js/laypage/laypage.js"></script>
+<link href="<%=path %>/js/bootstrap-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="<%=path %>/js/model/css/style.css" rel="stylesheet" type="text/css" />
 <title>学生主页</title>
+<style type="text/css">
+#hoverid :hover{background:white;}
+.c{text-align: center;}
+</style>
 </head>
 <body>
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li><a href="#">首页</a></li>
-		    <li><a href="#">工作台</a></li>
 	    </ul>
     </div>
     
     <div class="mainbox">
-	    <div class="mainleft">
-		    <div class="leftinfo">
-			    <div class="listtitle">数据统计</div>
-			    <div class="maintj"> 
-			       图表分析
-			    </div>
+	    <div style="width: 850px; height: auto;">
+		    <div class="leftinfo" style="height: auto;">
+		        <div><span style="font-size: 20px; position:relative; left: 35%; margin: 15px; margin-bottom: 0px;">宿舍缴费信息总览</span></div>
+			    <table class="tablelist" style="border: 0px;">
+			       <tr>
+			         <td class="c">序号</td>
+				     <td class="c">宿舍号</td>
+				     <td class="c">用水量</td>
+				     <td class="c">水费</td>
+				     <td class="c">用电量</td>
+				     <td class="c">电费</td>
+				     <td class="c">总计</td>
+				     <td class="c">是否缴费</td>
+				     <td class="c">日期</td>
+				     <td class="c">操作</td>
+			       </tr>
+			       <c:forEach items="${sdfxxs }" var="s" varStatus="i">
+			           <tr>
+			              <td class="c">${pager.page * 5 + i.index + 1 }</td>
+			              <td class="c">${s.ssh }</td>
+			              <td class="c">${s.ysl } 吨</td>
+			              <td class="c">${s.sf } 元</td>
+			              <td class="c">${s.ydl } 千瓦时</td>
+			              <td class="c">${s.df } 元</td>
+			              <td class="c">${s.zj } 元</td>
+			              <td class="c">
+			              	<c:if test="${s.ssfjf  == 1 }">是</c:if>
+			              	<c:if test="${s.ssfjf  == 0 }">否</c:if>
+			              </td>
+			              <td class="c">${s.date }</td>
+			              <td class="c">
+			                 <a href="<%=path %>/hsxy/sdjf/gostujf?stuid=${user.yhid }&date=${s.date }" style="color: #46A3FF;">缴费</a>&nbsp;
+			                 <a href="<%=path %>/hsxy/sdjf/findSdfxxBydate?ssid=${s.ssid }&date=${s.date }" style="color: #46A3FF;">查看详情</a>
+			              </td>
+			           </tr>
+			       </c:forEach>
+			       <tr id="hoverid">
+			         <td colspan='10'>
+				        <div id="page" style="margin-top: 25px;"></div> 
+			         </td>
+			       </tr>
+			    </table>
 		    </div>
 		    <!--leftinfo end-->
 	    </div>
@@ -58,6 +98,18 @@
 	function setWidth(){
 		var width = ($('.leftinfos').width()-12)/2;
 		$('.infoleft,.inforight').width(width);
-	}
+	};
+	//分页
+	laypage({
+		  cont: 'page', //容器。值支持id名、原生dom对象，jquery对象,
+		  pages: '${pager.totalPages }', //总页数
+		  curr: '${pager.page + 1 }',
+		  skip: true, //是否开启跳页
+		  jump: function(obj,first){
+	    	  if (!first) {//如果不是首页
+	            location = "<%=path %>/hsxy/sdjf/gostumain?stuid=${user.yhid }&page="+(obj.curr - 1);
+			}
+	      }
+		});
 </script>
 </html>

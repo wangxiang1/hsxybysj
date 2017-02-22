@@ -41,7 +41,7 @@ $(function(){
     <span><img src="<%=path %>/js/model/images/leftico01.png" /></span>管理信息
     </div> 
     	<ul class="menuson">
-	        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/gostumain" target="rightFrame">首页</a><i></i></li>
+	        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/gostumain?stuid=${user.yhid }&page=0" target="rightFrame">首页</a><i></i></li>
 	        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/gostugrxx?stuid=${user.yhid }" target="rightFrame">个人信息</a><i></i></li>
 	        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/gostusdfxx?stuid=${user.yhid }" target="rightFrame">水电费信息</a><i></i></li>
 	        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/gostujf?stuid=${user.yhid }" target="rightFrame">缴费管理</a><i></i></li>

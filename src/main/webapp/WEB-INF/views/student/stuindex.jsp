@@ -11,7 +11,7 @@
   <frame src="<%=path %>/hsxy/sdjf/gostutop" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
   <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
     <frame src="<%=path %>/hsxy/sdjf/gostuleft" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
-    <frame src="<%=path %>/hsxy/sdjf/gostumain" name="rightFrame" id="rightFrame" title="rightFrame" />
+    <frame src="<%=path %>/hsxy/sdjf/gostumain?stuid=${user.yhid }&page=0" name="rightFrame" id="rightFrame" title="rightFrame" />
   </frameset>
 </frameset>
 <noframes>

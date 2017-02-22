@@ -31,10 +31,15 @@
         <div><span style="font-size: 20px; position:relative; left: 45%; margin: 15px;">水电费信息</span></div>
         <div class="chaxun" style="position : relative; margin-bottom: 5px; left: 55%; ">
             <div style="position:relative; float: left;"><label style="font-size: 14px;">时间：</label></div>
-            <div style="position:relative; float: left; border: solid 1px black; margin-right: 10px;">
+            <div style="position:relative; float: left; border-radius:2px; border: solid 1px black; margin-right: 10px; ">
             <select id="date">
 				<c:forEach items="${dates }" var="d">
+				<c:if test="${d.substring(0, 19) == sdfxx.date }">
+					<option selected="selected" value="${d.substring(0, 19) }">${d.substring(0, 11) }</option>
+				</c:if>
+				<c:if test="${d.substring(0, 19) != sdfxx.date }">
 					<option value="${d.substring(0, 19) }">${d.substring(0, 11) }</option>
+				</c:if>
 				</c:forEach>
 			</select>
 			</div>

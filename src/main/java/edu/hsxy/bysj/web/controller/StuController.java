@@ -1,14 +1,18 @@
 package edu.hsxy.bysj.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import edu.hsxy.bysj.bean.Pager;
 import edu.hsxy.bysj.bean.Sdfxx;
 import edu.hsxy.bysj.bean.Student;
 import edu.hsxy.bysj.domain.DFInfo;
@@ -22,6 +26,7 @@ import edu.hsxy.bysj.repository.SsRepository;
 import edu.hsxy.bysj.repository.StuRepository;
 import edu.hsxy.bysj.repository.UserRepository;
 import edu.hsxy.bysj.util.MathUtil;
+import edu.hsxy.bysj.util.PageableTools;
 
 @Controller
 @RequestMapping("/hsxy/sdjf")
@@ -59,7 +64,51 @@ public class StuController {
 	}
 
 	@RequestMapping("/gostumain")
-	public String goStumain() {
+	public String goStumain(String stuid, String ssid, Model model, Integer page, Integer size) {
+		size = 5;
+		ArrayList<Sdfxx> sdfxxs = new ArrayList<Sdfxx>();
+		Page<SFInfo> sfInfos = null;
+		SsInfo ssInfo = null;
+		Pageable pageable = PageableTools.basicPage(page, size, "date");
+		if (null == ssid) {
+			StuInfo stuInfo = stuRepository.findOne(Integer.parseInt(stuid));
+			ssInfo = ssRepository.findBySsh(stuInfo.getSsh());
+			sfInfos = sfRepository.findSfxx(ssInfo.getSsid(), pageable);
+
+		} else {
+			ssInfo = ssRepository.findOne(Integer.parseInt(ssid));
+			sfInfos = sfRepository.findSfxx(Integer.parseInt(ssid), pageable);
+		}
+
+		for (SFInfo sfInfo : sfInfos.getContent()) {
+			DFInfo dfInfo = dfRepository.findDfxxBydate(ssInfo.getSsid(), sfInfo.getDate());
+			Sdfxx sdfxx = new Sdfxx();
+
+			sdfxx.setSsid(ssInfo.getSsid());
+			sdfxx.setSsh(ssInfo.getSsh());
+			sdfxx.setSfid(sfInfo.getSfid());
+			sdfxx.setYsl(sfInfo.getYsl());
+			sdfxx.setSf(sfInfo.getSf());
+
+			sdfxx.setDfid(dfInfo.getDfid());
+			sdfxx.setYdl(dfInfo.getYdl());
+			sdfxx.setDf(dfInfo.getDf());
+
+			double zj = Double.parseDouble(sfInfo.getSf()) + Double.parseDouble(dfInfo.getDf());
+			sdfxx.setZj(MathUtil.format(2, zj));
+			sdfxx.setSsfjf(sfInfo.getSfjf());
+			sdfxx.setDate(sfInfo.getDate().substring(0, 19));
+
+			sdfxxs.add(sdfxx);
+		}
+
+		Pager pager = new Pager();
+		pager.setPage(sfInfos.getNumber());
+		pager.setSize(sfInfos.getSize());
+		pager.setTotalPages(sfInfos.getTotalPages());
+
+		model.addAttribute("pager", pager);
+		model.addAttribute("sdfxxs", sdfxxs);
 		return "student/stumain";
 	}
 
@@ -109,8 +158,8 @@ public class StuController {
 	public String goStusdfxx(String stuid, Model model) {
 		StuInfo stuInfo = stuRepository.findOne(Integer.parseInt(stuid));
 		SsInfo ssInfo = ssRepository.findBySsh(stuInfo.getSsh());
-		SFInfo sfInfo = sfRepository.findLastSfxx(ssInfo.getSsid()).get(0);
-		DFInfo dfInfo = dfRepository.findLastDfxx(ssInfo.getSsid()).get(0);
+		SFInfo sfInfo = sfRepository.findSfxx(ssInfo.getSsid()).get(0);
+		DFInfo dfInfo = dfRepository.findDfxx(ssInfo.getSsid()).get(0);
 
 		Sdfxx sdfxx = new Sdfxx();
 		sdfxx.setSsid(ssInfo.getSsid());
@@ -178,12 +227,18 @@ public class StuController {
 	}
 
 	@RequestMapping("/gostujf")
-	public String goStujf(String stuid, Model model) {
+	public String goStujf(String stuid, String date, Model model) {
 		StuInfo stuInfo = stuRepository.findOne(Integer.parseInt(stuid));
 		SsInfo ssInfo = ssRepository.findBySsh(stuInfo.getSsh());
-		SFInfo sfInfo = sfRepository.findLastSfxx(ssInfo.getSsid()).get(0);
-		DFInfo dfInfo = dfRepository.findLastDfxx(ssInfo.getSsid()).get(0);
-
+		SFInfo sfInfo = null;
+		DFInfo dfInfo = null;
+		if (null == date) {
+			sfInfo = sfRepository.findSfxx(ssInfo.getSsid()).get(0);
+			dfInfo = dfRepository.findDfxx(ssInfo.getSsid()).get(0);
+		} else {
+			sfInfo = sfRepository.findSfxxBydate(ssInfo.getSsid(), date);
+			dfInfo = dfRepository.findDfxxBydate(ssInfo.getSsid(), date);
+		}
 		Sdfxx sdfxx = new Sdfxx();
 		sdfxx.setSsid(ssInfo.getSsid());
 		sdfxx.setSslh(ssInfo.getSslh());
@@ -214,8 +269,11 @@ public class StuController {
 
 		double zj = Double.parseDouble(sfInfo.getSf()) + Double.parseDouble(dfInfo.getDf());
 		sdfxx.setZj(MathUtil.format(2, zj));
+
+		List<String> dates = sfRepository.findAllDate(ssInfo.getSsid());
+		model.addAttribute("dates", dates);
+
 		model.addAttribute("sdfxx", sdfxx);
-		model.addAttribute("ssinfo", ssInfo);
 		return "student/stujf";
 	}
 
