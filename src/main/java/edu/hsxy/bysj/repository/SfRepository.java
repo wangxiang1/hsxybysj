@@ -27,7 +27,20 @@ public interface SfRepository extends PagingAndSortingRepository<SFInfo, Seriali
 	@Query("select s1.date from SFInfo s1 where s1.ssid=?1 order by s1.date desc")
 	List<String> findAllDate(int ssid);
 
+	@Query("select distinct s1.date from SFInfo s1 order by s1.date desc")
+	List<String> findAllDate2();
+
 	@Modifying
 	@Query("update SFInfo s set s.sfjf = 1 where s.sfid = ?1")
 	int updateSfjf(int sfid);
+
+	@Query("select s1 from SFInfo s1 where s1.sfjf = ?1")
+	Page<SFInfo> findSfxxBySfjf(String sfjf, Pageable pageable);
+
+	@Query("select s1 from SFInfo s1 where s1.date = ?1")
+	Page<SFInfo> findSfxxByDate(String date, Pageable pageable);
+
+	@Query("select s1 from SFInfo s1 where s1.date = ?1 and s1.sfjf = ?2")
+	Page<SFInfo> findSfxxByDateAndSfjf(String date, String sfjf, Pageable pageable);
+
 }

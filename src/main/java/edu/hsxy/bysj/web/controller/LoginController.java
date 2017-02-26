@@ -18,27 +18,10 @@ public class LoginController {
 	@Autowired
 	private UserRepository userRepository;
 
-	/*
-	 * @Autowired private SfRepository sfRepository;
-	 * 
-	 * @Autowired private DfRepository dfRepository;
-	 */
-
 	@RequestMapping("/")
 	public String goLogin() {
-
-		/*
-		 * SFInfo sfInfo = new SFInfo(3, "2017-06-16 22:14:32", "0", "10",
-		 * "2.35", "23.5", "1", "140", "150", "1"); SFInfo sfInfo1 = new
-		 * SFInfo(4, "2017-06-16 22:14:32", "0", "100", "2.35", "235", "1",
-		 * "600", "700", "1"); DFInfo dfInfo = new DFInfo(3,
-		 * "2017-06-16 22:14:32", "0", "10", "0.52", "5.2", "1", "140", "150",
-		 * "1"); DFInfo dfInfo1 = new DFInfo(4, "2017-06-16 22:14:32", "0",
-		 * "100", "0.52", "52", "1", "600", "700", "1");
-		 * sfRepository.save(sfInfo); sfRepository.save(sfInfo1);
-		 * dfRepository.save(dfInfo); dfRepository.save(dfInfo1);
-		 */
-
+		// MsgSender.sendMsg("18330822332",
+		// "近日武林大乱，系屠龙宝刀重现江湖，血流成河，武林侠士奔走相告，欲求阁下脸皮制成宝盾，以救万民于水火！");
 		return "login";
 	}
 

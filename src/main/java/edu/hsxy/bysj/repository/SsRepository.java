@@ -18,4 +18,14 @@ public interface SsRepository extends CrudRepository<SsInfo, Serializable> {
 	@Modifying
 	@Query("update SsInfo s set s.ssye = ?2 where s.ssid = ?1")
 	int updateYue(int ssid, String ssye);
+
+	@Query("from SsInfo s where s.ssid = ?1 and s.ssh like CONCAT('%',?2,'%')")
+	SsInfo findBySshAndId(int ssid, String ssh);
+
+	@Query("from SsInfo s where s.ssid = ?1 and s.sslh like CONCAT('%',?2,'%')")
+	SsInfo findBySslhAndId(int ssid, String sslh);
+
+	@Query("from SsInfo s where s.sslh like CONCAT('%',?1,'%') and s.ssh like CONCAT('%',?2,'%') and s.ssid = ?3")
+	SsInfo findBySslhAndSshAndId(String sslh, String ssh, int ssid);
+
 }

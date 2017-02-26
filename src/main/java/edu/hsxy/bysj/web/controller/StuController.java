@@ -89,10 +89,12 @@ public class StuController {
 			sdfxx.setSfid(sfInfo.getSfid());
 			sdfxx.setYsl(sfInfo.getYsl());
 			sdfxx.setSf(sfInfo.getSf());
+			sdfxx.setSfdj(sfInfo.getSfdj());
 
 			sdfxx.setDfid(dfInfo.getDfid());
 			sdfxx.setYdl(dfInfo.getYdl());
 			sdfxx.setDf(dfInfo.getDf());
+			sdfxx.setDfdj(dfInfo.getDfdj());
 
 			double zj = Double.parseDouble(sfInfo.getSf()) + Double.parseDouble(dfInfo.getDf());
 			sdfxx.setZj(MathUtil.format(2, zj));
@@ -103,9 +105,9 @@ public class StuController {
 		}
 
 		Pager pager = new Pager();
-		pager.setPage(sfInfos.getNumber());
-		pager.setSize(sfInfos.getSize());
-		pager.setTotalPages(sfInfos.getTotalPages());
+		pager.setPage(sfInfos.getNumber());// 页码
+		pager.setSize(sfInfos.getSize());// 页容量
+		pager.setTotalPages(sfInfos.getTotalPages());// 总页数
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("sdfxxs", sdfxxs);

@@ -81,8 +81,12 @@ function goLogin(dlzh,pwd){
 	    	     "pwd":pwd
 			     },
 	       success:function(data){
-	    	   if (data) {
-				 location = "<%=path %>/hsxy/sdjf/gostu";
+	    	   if (data.sfbz == 1) {//学生 
+				   location = "<%=path %>/hsxy/sdjf/gostu";
+			   }else if(data.sfbz == 0){//系统管理员
+				   location = "<%=path %>/hsxy/sdjf/admin/goxtgly"; 
+			   }else if(data.sfbz == 2){//宿舍管理员
+				   location = "<%=path %>/hsxy/sdjf/"; 
 			   }else{
 				   alert("密码或学号输入错误！")
 			   }

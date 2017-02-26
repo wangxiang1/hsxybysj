@@ -26,4 +26,13 @@ public interface DfRepository extends PagingAndSortingRepository<DFInfo, Seriali
 	@Modifying
 	@Query("update DFInfo d set d.sfjf = 1 where d.dfid = ?1")
 	int updateSfjf(int dfid);
+
+	@Query("select d1 from DFInfo d1 where d1.sfjf = ?1")
+	List<DFInfo> findDfxxBySfjf(String sfjf, Pageable pageable);
+
+	@Query("select d1 from DFInfo d1 where d1.date = ?1")
+	List<DFInfo> findDfxxByDate(String date, Pageable pageable);
+
+	@Query("select d1 from DFInfo d1 where d1.date = ?1 and d1.sfjf = ?2")
+	List<DFInfo> findDfxxByDateAndSfjf(String date, String sfjf, Pageable pageable);
 }

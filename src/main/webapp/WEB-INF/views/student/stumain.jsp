@@ -14,6 +14,7 @@
 <style type="text/css">
 #hoverid :hover{background:white;}
 .c{text-align: center;}
+.tablelist td{padding: 0px;}
 </style>
 </head>
 <body>
@@ -25,18 +26,20 @@
     </div>
     
     <div class="mainbox">
-	    <div style="width: 850px; height: auto;">
+	    <div style="width:850px; height: auto;">
 		    <div class="leftinfo" style="height: auto;">
-		        <div><span style="font-size: 20px; position:relative; left: 35%; margin: 15px; margin-bottom: 0px;">宿舍缴费信息总览</span></div>
-			    <table class="tablelist" style="border: 0px;">
+		        <div><span style="font-size: 20px; position:relative; left: 35%; margin: 15px; margin-bottom: 10px;">宿舍缴费信息总览</span></div>
+			    <table class="tablelist" style="border: 0px; padding: 0px;">
 			       <tr>
 			         <td class="c">序号</td>
 				     <td class="c">宿舍号</td>
-				     <td class="c">用水量</td>
-				     <td class="c">水费</td>
-				     <td class="c">用电量</td>
-				     <td class="c">电费</td>
-				     <td class="c">总计</td>
+				     <td class="c">用水量<br />&nbsp;&nbsp;（吨）</td>
+				     <td class="c">水费单价<br />&nbsp;&nbsp;（元/吨）</td>
+				     <td class="c">水费<br />&nbsp;&nbsp;（元）</td>
+				     <td class="c">用电量<br />&nbsp;&nbsp;（千瓦时）</td>
+				     <td class="c">电费单价<br />&nbsp;&nbsp;（元/千瓦时）</td>
+				     <td class="c">电费<br />&nbsp;&nbsp;（元）</td>
+				     <td class="c">总计<br />&nbsp;&nbsp;（元）</td>
 				     <td class="c">是否缴费</td>
 				     <td class="c">日期</td>
 				     <td class="c">操作</td>
@@ -45,25 +48,27 @@
 			           <tr>
 			              <td class="c">${pager.page * 5 + i.index + 1 }</td>
 			              <td class="c">${s.ssh }</td>
-			              <td class="c">${s.ysl } 吨</td>
-			              <td class="c">${s.sf } 元</td>
-			              <td class="c">${s.ydl } 千瓦时</td>
-			              <td class="c">${s.df } 元</td>
-			              <td class="c">${s.zj } 元</td>
+			              <td class="c">${s.ysl }</td>
+			              <td class="c">${s.sfdj }</td>
+			              <td class="c">${s.sf }</td>
+			              <td class="c">${s.ydl }</td>
+			              <td class="c">${s.dfdj }</td>
+			              <td class="c">${s.df }</td>
+			              <td class="c">${s.zj }</td>
 			              <td class="c">
 			              	<c:if test="${s.ssfjf  == 1 }">是</c:if>
 			              	<c:if test="${s.ssfjf  == 0 }">否</c:if>
 			              </td>
 			              <td class="c">${s.date }</td>
 			              <td class="c">
-			                 <a href="<%=path %>/hsxy/sdjf/gostujf?stuid=${user.yhid }&date=${s.date }" style="color: #46A3FF;">缴费</a>&nbsp;
-			                 <a href="<%=path %>/hsxy/sdjf/findSdfxxBydate?ssid=${s.ssid }&date=${s.date }" style="color: #46A3FF;">查看详情</a>
+			                 <a class="tablelink" href="<%=path %>/hsxy/sdjf/gostujf?stuid=${user.yhid }&date=${s.date }">缴费</a>&nbsp;
+			                 <a class="tablelink" href="<%=path %>/hsxy/sdjf/findSdfxxBydate?ssid=${s.ssid }&date=${s.date }">查看详情</a>
 			              </td>
 			           </tr>
 			       </c:forEach>
 			       <tr id="hoverid">
-			         <td colspan='10'>
-				        <div id="page" style="margin-top: 25px;"></div> 
+			         <td colspan='12'>
+				        <div id="page" style="position:relative;float:right; margin-top: 25px;"></div>'
 			         </td>
 			       </tr>
 			    </table>
@@ -86,7 +91,7 @@
 				    <li><a href="#">香港环境局长吁民众支持政府扩建堆填区</a></li> 
 			    </ul>        
 		    </div>
-	    </div>
+	    </div> 
 	    <!--mainright end-->
     </div>
 </body>
