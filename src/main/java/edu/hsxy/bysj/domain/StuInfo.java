@@ -35,7 +35,7 @@ public class StuInfo {
 	 */
 	private String zy;
 	/**
-	 * 学生宿舍id
+	 * 学生宿舍号
 	 */
 	private String ssh;
 

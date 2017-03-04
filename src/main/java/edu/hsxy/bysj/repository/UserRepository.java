@@ -2,15 +2,15 @@ package edu.hsxy.bysj.repository;
 
 import java.io.Serializable;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.hsxy.bysj.domain.User;
 
 @Transactional
-public interface UserRepository extends CrudRepository<User, Serializable> {
+public interface UserRepository extends JpaRepository<User, Serializable> {
 
 	@Query("from User u where u.dlzh=?1 and u.pwd=?2")
 	User findUser(String dlzh, String pwd);

@@ -14,6 +14,7 @@
 <style type="text/css">
 #hoverid :hover{background:white;}
 .c{text-align: center;}
+.h{font-weight: bold;}
 .tablelist td{padding: 0px;}
 </style>
 </head>
@@ -31,18 +32,18 @@
 		        <div><span style="font-size: 20px; position:relative; left: 35%; margin: 15px; margin-bottom: 10px;">宿舍缴费信息总览</span></div>
 			    <table class="tablelist" style="border: 0px; padding: 0px;">
 			       <tr>
-			         <td class="c">序号</td>
-				     <td class="c">宿舍号</td>
-				     <td class="c">用水量<br />&nbsp;&nbsp;（吨）</td>
-				     <td class="c">水费单价<br />&nbsp;&nbsp;（元/吨）</td>
-				     <td class="c">水费<br />&nbsp;&nbsp;（元）</td>
-				     <td class="c">用电量<br />&nbsp;&nbsp;（千瓦时）</td>
-				     <td class="c">电费单价<br />&nbsp;&nbsp;（元/千瓦时）</td>
-				     <td class="c">电费<br />&nbsp;&nbsp;（元）</td>
-				     <td class="c">总计<br />&nbsp;&nbsp;（元）</td>
-				     <td class="c">是否缴费</td>
-				     <td class="c">日期</td>
-				     <td class="c">操作</td>
+			         <td class="c h">序号</td>
+				     <td class="c h">宿舍号</td>
+				     <td class="c h">用水量<br />&nbsp;&nbsp;（吨）</td>
+				     <td class="c h">水费单价<br />&nbsp;&nbsp;（元/吨）</td>
+				     <td class="c h">水费<br />&nbsp;&nbsp;（元）</td>
+				     <td class="c h">用电量<br />&nbsp;&nbsp;（千瓦时）</td>
+				     <td class="c h">电费单价<br />&nbsp;&nbsp;（元/千瓦时）</td>
+				     <td class="c h">电费<br />&nbsp;&nbsp;（元）</td>
+				     <td class="c h">总计<br />&nbsp;&nbsp;（元）</td>
+				     <td class="c h">是否缴费</td>
+				     <td class="c h">日期</td>
+				     <td class="c h">操作</td>
 			       </tr>
 			       <c:forEach items="${sdfxxs }" var="s" varStatus="i">
 			           <tr>

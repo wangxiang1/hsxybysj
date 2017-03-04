@@ -45,9 +45,7 @@ $(function(){
     	<ul class="menuson">
         <li class="active"><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/goxtglymain" target="rightFrame">首页</a><i></i></li>
         <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/gosdfsj?page=0&sslh=&ssh=&sfjf&date=" target="rightFrame">水电费数据表</a><i></i></li>
-        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/" target="rightFrame">水电费总览</a><i></i></li>
-        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/" target="rightFrame">欠费管理</a><i></i></li>
-        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/" target="rightFrame">费用统计</a><i></i></li>
+        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/fytj?sslh=&ssh=&qssj=2016-01-01 00:00:00&jzsj=2017-07-08 00:00:00" target="rightFrame">费用统计</a><i></i></li>
         </ul>    
     </dd>
     
@@ -56,7 +54,7 @@ $(function(){
     <span><img src="<%=path %>/js/model/images/leftico02.png" /></span>管理用户信息
     </div>
     <ul class="menuson">
-        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/" target="rightFrame">用户信息数据表</a><i></i></li>
+        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/" target="rightFrame">用户信息</a><i></i></li>
         <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/adduser" target="rightFrame">新增用户</a><i></i></li>
         </ul>     
     </dd> 
@@ -64,8 +62,8 @@ $(function(){
     <dd>
     <div class="title"><span><img src="<%=path %>/js/model/images/leftico03.png" /></span>公告管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#" target="rightFrame">公告信息</a><i></i></li>
-        <li><cite></cite><a href="#" target="rightFrame">新增公告</a><i></i></li>
+        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/gggl" target="rightFrame">公告信息</a><i></i></li>
+        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/gggl" target="rightFrame">新增公告</a><i></i></li>
     </ul>    
     </dd>
       
