@@ -35,11 +35,14 @@
 	    </ul>    
     </div>
     <div class="loginbody">
-    	<span class="systemlogo"></span> 
+    	<div style="height:75px; margin-top:75px; text-align: center;">
+    	   <img alt="logo" src="<%=path %>/js/model/images/hsxylogo.png" style="width: 80px;height: 80px;margin-bottom: -20px; margin-left: 40px;">
+    	   <font style="font-size: 38px; color: #F0F0F0;">&nbsp;&nbsp;水电缴费管理系统</font>
+    	 </div> 
 	    <div class="loginbox">
 		    <ul>
 		    	<li><input id="dlzh"  type="text" class="loginuser" placeholder="学号" onclick=""/></li>
-		    	<li><input id="pwd" type="text" class="loginpwd" placeholder="密码" onclick=""/></li>
+		    	<li><input id="pwd" type="password" class="loginpwd" placeholder="密码" onclick=""/></li>
 		    	<li><input id="loginid" type="button" class="loginbtn" value="登录"  onclick="loginXt()"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
 		    </ul>
 	    </div>

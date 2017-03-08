@@ -19,8 +19,8 @@
 	<div class="place">
 		<span>位置：</span>
 		<ul class="placeul">
-			<li><a href="#">管理水电费信息</a></li>
-			<li><a href="#">首页</a></li>
+			<li>管理水电费信息</li>
+			<li>水电费数据表</li>
 		</ul>
 	</div>
 
@@ -102,7 +102,6 @@
 		<table class="tablelist">
 			<thead>
 				<tr>
-					<th><input name="" type="checkbox" value="" checked="checked" /></th>
 					<th>编号</th>
 					<th>宿舍号</th>
 					<th>宿舍楼号</th>
@@ -119,7 +118,6 @@
 			<tbody>
 			<c:forEach items="${sdfxxs }" var="s" varStatus="i">
 				<tr>
-					<td><input name="" type="checkbox" value="" /></td>
 					<td>${pager.page * 5 + i.index + 1 }</td>
 					<td>${s.ssh }</td>
 					<td>${s.sslh }</td>

@@ -2,8 +2,6 @@ package edu.hsxy.bysj.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,13 +14,12 @@ import javax.persistence.Table;
 @Table(name = "SSADMIN_INFO")
 public class SSAdmin {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ssglyid", nullable = false)
 	private int ssglyid;
 	/**
 	 * 性别
 	 */
-	private String sex;
+	private int sex;
 	/**
 	 * 宿舍楼号
 	 */
@@ -32,7 +29,7 @@ public class SSAdmin {
 		super();
 	}
 
-	public SSAdmin(int ssglyid, String sex, String sslh) {
+	public SSAdmin(int ssglyid, int sex, String sslh) {
 		super();
 		this.ssglyid = ssglyid;
 		this.sex = sex;
@@ -47,11 +44,11 @@ public class SSAdmin {
 		this.ssglyid = ssglyid;
 	}
 
-	public String getSex() {
+	public int getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 

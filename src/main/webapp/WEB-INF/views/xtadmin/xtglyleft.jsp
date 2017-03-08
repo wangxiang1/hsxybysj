@@ -54,7 +54,7 @@ $(function(){
     <span><img src="<%=path %>/js/model/images/leftico02.png" /></span>管理用户信息
     </div>
     <ul class="menuson">
-        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/" target="rightFrame">用户信息</a><i></i></li>
+        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/yhxx?page=0&bz=1" target="rightFrame">用户信息</a><i></i></li>
         <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/adduser" target="rightFrame">新增用户</a><i></i></li>
         </ul>     
     </dd> 
@@ -70,8 +70,7 @@ $(function(){
     <dd>
     <div class="title"><span><img src="<%=path %>/js/model/images/leftico03.png" /></span>其他设置</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#" target="rightFrame">修改个人信息</a><i></i></li>
-        <li><cite></cite><a href="#" target="rightFrame">修改密码</a><i></i></li>
+        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/goglyxgmm" target="rightFrame">修改密码</a><i></i></li>
     </ul>    
     </dd> 
     </dl>

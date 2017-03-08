@@ -27,7 +27,7 @@
     <ul class="placeul">
     <li>首页</li>
     <li>管理用户信息</li>
-    <li>新增用户</li>
+    <li>修改用户信息</li>
     </ul>
     </div>
     
@@ -37,37 +37,54 @@
     
     <div class="itab">
   	<ul> 
-    <li><a href="#tab1" class="selected">学生用户</a></li> 
-    <li><a href="#tab2">管理员用户</a></li> 
+  	<c:if test="${bz == 1 }">
+    	<li><a href="#tab1" class="selected">学生用户</a></li> 
+  	</c:if>
+  	<c:if test="${bz == 2 }">
+        <li><a href="#tab2" class="selected">管理员用户</a></li>
+    </c:if> 
   	</ul>
     </div> 
     
   	<div id="tab1" class="tabson" style="height: 500px;">
     
-    <div class="formtext">新增学生用户</div>
+    <div class="formtext">修改学生用户</div>
     
     <ul class="forminfo">
     <li>
     	<label>学号<b>*</b></label>
-   	    <input id="studlzh" type="text" class="dfinput"  style="width:508px; " onblur="checkStuDlzh()"/>
+   	    <input id="studlzh" type="text" class="dfinput" value="${student.dlzh }" readonly="readonly" style="width:508px;"/>
     </li>
     <li>
     	<label>姓名<b>*</b></label>
-    	<input id="stuyhm" type="text" class="dfinput"  style="width:508px;" onblur="checkStuYhm()"/>
+    	<input id="stuyhm" type="text" class="dfinput" value="${student.yhm }"  style="width:508px;" onblur="checkStuYhm()"/>
    </li>
    <li style="margin-top: 10px;"><label>性别<b>*</b></label>  
     <div class="vocation">
 	    <select class="select1" id="stusex">
-		    <option value="0">女</option>
+	    <c:if test="${student.sex == 0 }">
+	    	<option value="0" selected="selected">女</option>
 		    <option value="1">男</option>
+	    </c:if>
+	    <c:if test="${student.sex == 1 }">
+	    	<option value="0">女</option>
+		    <option value="1" selected="selected">男</option>
+	    </c:if>
+		    
 	    </select>
     </div>
     </li>
     <li><label style="margin-top: 10px;">学历<b>*</b></label>  
     <div class="vocation" style="margin-top: 10px;">
 	    <select class="select1" id="stuxl" onchange="getXb()">
+	     <c:if test="${student.xl == 0 }">
 		    <option value="0" selected = "selected">本科</option>
 		    <option value="1">专科</option>
+	     </c:if>
+	     <c:if test="${student.xl == 1 }">
+		    <option value="0">本科</option>
+		    <option value="1" selected = "selected">专科</option>
+	     </c:if>
 	    </select>
     </div>
     </li>
@@ -80,7 +97,6 @@
     
     <div class="cityright">
     <select class="select2" id="stuzy">
-   		 <option value="">请选择</option>
     </select>
     </div>
     
@@ -91,13 +107,11 @@
     <div class="usercity" style="margin-top: 10px;">
     <div class="cityleft">
     <select class="select2" id="stusslh" onchange="getSshs()">
-      <option value="">请选择</option>
     </select>
     </div>
     
     <div class="cityright">
     <select class="select2" id="stussh">
-   		 <option value="">请选择</option>
     </select>
     </div>
     
@@ -105,7 +119,7 @@
     </li>
     <li>
     	<label style="margin-top: 10px;">手机号<b>*</b></label>
-    	<input id="stusjhm" type="text" class="dfinput" onblur="checkTel(1)" style="width:508px;margin-top: 10px;"/>
+    	<input id="stusjhm" type="text" class="dfinput" value="${student.sjhm }" onblur="checkTel(1)" style="width:508px;margin-top: 10px;"/>
     </li>
     <li><label>&nbsp;</label><input id="stuquren" type="button" class="btn" value="确认"/></li>
     </ul>
@@ -114,30 +128,47 @@
     
   	<div id="tab2" class="tabson" style="height: 500px;">
     
-    <div class="formtext">新增管理员用户</div>
+    <div class="formtext">修改管理员用户信息</div>
     
     <ul class="forminfo">
     <li>
     	<label>登录账号<b>*</b></label>
-    	<input id="glydlzh" type="text" class="dfinput"  style="width:508px;" onblur="checkGlyDlzh()"/>
+    	<input id="glydlzh" type="text" class="dfinput" value="${ssAadmin.dlzh }" readonly="readonly" style="width:508px;"/>
     </li>
     <li>
     	<label>姓名<b>*</b></label>
-    	<input id="glyyhm" type="text" class="dfinput"  style="width:508px;" onblur="checkGlyYhm()"/>
+    	<input id="glyyhm" type="text" class="dfinput"  value="${ssAadmin.yhm }"  style="width:508px;" onblur="checkGlyYhm()"/>
     </li>
     <li style="margin-top: 10px;"><label>性别<b>*</b></label>  
     <div class="vocation">
 	    <select class="select1" id="glysex">
-		    <option value="0">女</option>
-		    <option value="1">男</option>
+			<c:if test="${ssAadmin.sex == 0 }">
+		    	<option value="0" selected="selected">女</option>
+			    <option value="1">男</option>
+		    </c:if>
+		    <c:if test="${ssAadmin.sex == 1 }">
+		    	<option value="0">女</option>
+			    <option value="1" selected="selected">男</option>
+		    </c:if>
+		    <c:if test="${ssAadmin.sex != 1 && ssAadmin.sex != 0 }">
+		    	<option value="">请选择</option>
+		    	<option value="0">女</option>
+			    <option value="1">男</option>
+		    </c:if>
 	    </select>
     </div>
     </li>
     <li><label style="margin-top: 10px;">类型<b>*</b></label>  
     <div class="vocation" style="width: 100px; margin-top: 10px;">
 	    <select class="select1" style="width: 98px;" id="glybz" onchange="getSslhs()">
-		    <option value="0">系统管理员</option>
-		    <option value="2">宿舍管理员</option>
+		    <c:if test="${ssAadmin.sfbz == 0 }">
+		    	<option value="0"  selected="selected">系统管理员</option>
+		    	<option value="2">宿舍管理员</option>
+		    </c:if>
+		    <c:if test="${ssAadmin.sfbz == 2 }">
+		    	<option value="0">系统管理员</option>
+		    	<option value="2" selected="selected">宿舍管理员</option>
+		    </c:if>
 	    </select>
     </div>
     </li>
@@ -149,7 +180,7 @@
     </li>
     <li>
        <label style="margin-top: 10px;">手机号<b>*</b></label>
-       <input id="glysjhm" type="text" class="dfinput" onblur="checkTel(2)" style="width:508px;margin-top: 10px;"/>
+       <input id="glysjhm" type="text" class="dfinput" onblur="checkTel(2)" value="${ssAadmin.sjhm }" style="width:508px;margin-top: 10px;"/>
     </li>
     <li><label>&nbsp;</label><input id="glyquren" type="button" class="btn" value="确认"/></li>
     </ul>
@@ -164,6 +195,11 @@
       $(function(){
     	  getXb();
     	  getSslhs();
+    	  if("${bz }" == 1){
+    		  $("#tab2").hide();
+    	  }else{
+    		  $("#tab1").hide();
+    	  }
       });
       
       $("#stuquren").click(function(){
@@ -177,10 +213,33 @@
     	  var stussh = $("#stussh").val();
     	  var stusjhm = $("#stusjhm").val();
     	  
-		  //if(checkStuDlzh() && checkTel(1) && checkXbZy() && checkXbZy() && checkSslSsh() && checkStuYhm()){
-    	  location = "<%=path%>/hsxy/sdjf/admin/addstu?studlzh="+studlzh+"&stuyhm="+stuyhm+"&stusex="+stusex+
-    			  "&stuxl="+stuxl+"&stuxb="+stuxb+"&stuzy="+stuzy+"&stusslh="+stusslh+"&stussh="+stussh+"&stusjhm="+stusjhm;
-    	  //}
+    	  $.ajax({
+    	       type:"POST",
+    	       url:"<%=path%>/hsxy/sdjf/admin/updatestu",
+    	       data:{
+    	    	     "studlzh":studlzh,
+    	    	     "stuyhm":stuyhm,
+    	    	     "stusex":stusex,
+    	    	     "stuxl":stuxl,
+    	    	     "stuxb":stuxb,
+    	    	     "stuzy":stuzy,
+    	    	     "stusslh":stusslh,
+    	    	     "stussh":stussh,
+    	    	     "stusjhm":stusjhm
+    			     },
+    	       success:function(data){
+    	    	 if(data){
+    	    		 location = "<%=path %>/hsxy/sdjf/admin/yhxx?page=0&bz=1";
+    	    	 }else{
+    	    		 alert("修改失败");
+    	    	 }
+    	    	  
+    	       },
+               error: function() {
+                   //请求出错
+                   alert("请求出错");
+               }
+    		   });
       });
       $("#glyquren").click(function(){
     	  var glydlzh = $("#glydlzh").val();
@@ -189,77 +248,32 @@
     	  var glybz = $("#glybz").val();
     	  var glysslh = $("#glysslh").val();
     	  var glysjhm = $("#glysjhm").val();
-    	  alert(glysjhm);
-    	  //if(checkGlyDlzh() && checkSsl() && checkTel(2) && checkGlyYhm()){
-    	  location = "<%=path%>/hsxy/sdjf/admin/addgly?glydlzh="+glydlzh+"&glyyhm="+glyyhm+"&glysex="+glysex+
-    			  "&glybz="+glybz+"&glysslh="+glysslh+"&glysjhm="+glysjhm;
-    	  //}
     	  
+    	  $.ajax({
+   	       type:"POST",
+   	       url:"<%=path%>/hsxy/sdjf/admin/updategly",
+   	       data:{
+   	    	     "glydlzh":glydlzh,
+   	    	     "glyyhm":glyyhm,
+   	    	     "glysex":glysex,
+   	    	     "glybz":glybz,
+   	    	     "glysslh":glysslh,
+   	    	     "glysjhm":glysjhm
+   			     },
+   	       success:function(data){
+   	    	 if(data){
+   	    		 location = "<%=path %>/hsxy/sdjf/admin/yhxx?page=0&bz=2";
+   	    	 }else{
+   	    		 alert("修改失败");
+   	    	 }
+   	    	  
+   	       },
+              error: function() {
+                  //请求出错
+                  alert("请求出错");
+              }
+   		   });
       });
-      function checkStuDlzh(){
-      	  var dlzh = $("#studlzh").val();
-	      	$.ajax({
-	   	       type:"POST",
-	   	       url:"<%=path%>/hsxy/sdjf/admin/finddlzh",
-	   	       data:{
-	   	    	     "dlzh":dlzh
-	   			     },
-	   	       success:function(data){
-	   	    	if(dlzh == null || dlzh == ""){
-	      			alert("学号不能为空");
-	      			return false;
-	      		}else if(isNaN(dlzh)){
-	      			alert("学号只能是数字");
-	      			return false;
-	      		}else if(data){
-	      			alert("学号已经存在，请重新输入");
-	      			return false;
-	      		}
-	      		return true;
-	   	       },
-	              error: function() {
-	                  //请求出错
-	                  alert("请求出错");
-	              }
-	   		   });
-      	}
-    	
-    	function checkGlyDlzh(){
-        	  var dlzh = $("#glydlzh").val();
-        	  $.ajax({
-   	   	       type:"POST",
-   	   	       url:"<%=path%>/hsxy/sdjf/admin/finddlzh",
-   	   	       data:{
-   	   	    	     "dlzh":dlzh
-   	   			     },
-   	   	       success:function(data){
-        		if(dlzh == null || dlzh == ""){
-        			alert("登录账号不能为空");
-        			return false;
-        		}else if(isNaN(dlzh)){
-        			alert("登录账号只能是数字");
-        			return false;
-        		}else if(data){
-        			alert("登录账号已经存在，请重新输入");
-        			return false;
-        		}
-        		return true;
-   	   	 },
-         error: function() {
-             //请求出错
-             alert("请求出错");
-         }
-		   });
-        	}
-    	function checkGlyYhm(){
-      	  var glyyhm = $("#glyyhm").val();
-      	  if (glyyhm == "") {
-  			alert("用户名不为空");
-  			return false;
-  		}
-      	  return true;
-        }
-        
         function checkStuYhm(){
       	  var stuyhm = $("#stuyhm").val();
       	  if (stuyhm == "") {
@@ -345,10 +359,17 @@
   	    		 var strs= new Array(); //定义一数组 
   	    		 strs = str.split(',');
   	    		 $.each(strs,function(s,d){
-  	   			      html += '<option value="'+d+'">'+d+'</option>';
+  	    			if("${student.xb}" == d){
+  	    				html += '<option value="'+d+'" selected="selected">'+d+'</option>';
+  	    			}else{
+  	    				html += '<option value="'+d+'">'+d+'</option>';
+  	    			}
+  	   			      
   	   		      });
   	    	  }
      	    	  $("#stuxb").html(html);
+     	    	  getZy();
+     	    	  
      	       },
                 error: function() {
                     //请求出错
@@ -358,6 +379,7 @@
         }
         
         function getZy(){
+        	debugger
       	  var xl = $("#stuxl").val();
       	  var xb = $("#stuxb").val();
       	  $.ajax({
@@ -374,7 +396,11 @@
   	    		 var strs= new Array(); //定义一数组 
   	    		 strs = str.split(',');
   	    		 $.each(strs,function(s,d){
-  	   			      html += '<option value="'+d+'">'+d+'</option>';
+  	    			if("${student.zy}" == d){
+  	   			         html += '<option value="'+d+'" selected="selected">'+d+'</option>';
+  	    			}else{
+  	    				 html += '<option value="'+d+'">'+d+'</option>';
+  	    			}
   	   		      });
   	    	  }
      	    	  $("#stuzy").html(html);
@@ -402,23 +428,34 @@
   		    		 var strs= new Array(); //定义一数组 
   		    		 strs = str.split(',');
   		    		 $.each(strs,function(s,d){
-  		   			      html += '<option value="'+d+'">'+d+'号楼</option>';
+  		    			if("${ssAadmin.sslh}" == d){
+  		   			      html += '<option value="'+d+'" selected = "selected">'+d+'号楼</option>';
+  		    			}else{
+  		    			  html += '<option value="'+d+'">'+d+'号楼</option>';
+  		    			}
   		   		      });
   		    	  }
   			}
      	    	  $("#glysslh").html(html);
      	    	  
-     	    	var html1 = '<option value="">请选择</option>';
+     	      var html1 = '<option value="">请选择</option>';
    	    	  var str = (data.sslhs).toString();
   	    	  if(str != ""){
   	    		 var strs= new Array(); //定义一数组 
   	    		 strs = str.split(',');
   	    		 $.each(strs,function(s,d){
-  	   			      html1 += '<option value="'+d+'">'+d+'号楼</option>';
+  	    			if("${student.sslh}" == d){
+  	   			          html1 += '<option value="'+d+'" selected = "selected">'+d+'号楼</option>';
+  	    			}else{
+		    			  html1 += '<option value="'+d+'">'+d+'号楼</option>';
+		    			}
   	   		      });
   	    	  }
      	    	  
      	    	  $("#stusslh").html(html1);
+     	    	  
+     	    	  getSshs();
+     	    	  
      	       },
                 error: function() {
                     //请求出错
@@ -442,7 +479,11 @@
   	  	    		 var strs= new Array(); //定义一数组 
   	  	    		 strs = str.split(',');
   	  	    		 $.each(strs,function(s,d){
-  	  	   			      html += '<option value="'+d+'">'+d+'</option>';
+  	  	    			if("${student.ssh}" == d){
+  	  	   			         html += '<option value="'+d+'" selected="selected">'+d+'</option>';
+  	  	    			}else{
+  	  	    				 html += '<option value="'+d+'">'+d+'</option>';
+  	  	    			}
   	  	   		      });
   	  	    	  }
   	     	    	  $("#stussh").html(html);

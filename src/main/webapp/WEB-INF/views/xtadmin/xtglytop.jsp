@@ -22,7 +22,8 @@ $(function(){
 </head>
 <body style="background:url(<%=path %>/js/model/images/topbg.gif) repeat-x;">
     <div class="topleft">
-    	<a href="main.html" target="_parent"><img src="<%=path %>/js/model/images/logo.png" title="系统首页" /></a>
+    	<a href="main.html" target="_parent"><img alt="logo" src="<%=path %>/js/model/images/hsxylogo.png" style="width: 60px;height: 60px; margin-left: 20px;">
+    	  <div style="height: 50px; float: right; margin-right: 55px; margin-top: 30px;"><font style="font-size: 18px; color: #F0F0F0;">水电缴费管理系统</font></div></a>
     </div>
         
     <ul class="nav">
