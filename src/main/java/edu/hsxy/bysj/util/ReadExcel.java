@@ -14,7 +14,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.hsxy.bysj.bean.Test;
+import edu.hsxy.bysj.bean.Sdfxx;
 
 public class ReadExcel {
 	// 总行数
@@ -49,9 +49,9 @@ public class ReadExcel {
 	 * @param fielName
 	 * @return
 	 */
-	public List<Test> getExcelInfo(MultipartFile mFile) {
+	public List<Sdfxx> getExcelInfo(MultipartFile mFile) {
 		String fileName = mFile.getOriginalFilename();// 获取文件名
-		List<Test> userList = null;
+		List<Sdfxx> userList = null;
 		try {
 			if (!validateExcel(fileName)) {// 验证文件名是否合格
 				return null;
@@ -77,8 +77,8 @@ public class ReadExcel {
 	 * @return
 	 * @throws IOException
 	 */
-	public List<Test> createExcel(InputStream is, boolean isExcel2003) {
-		List<Test> userList = null;
+	public List<Sdfxx> createExcel(InputStream is, boolean isExcel2003) {
+		List<Sdfxx> userList = null;
 		try {
 			Workbook wb = null;
 			if (isExcel2003) {// 当excel是2003时,创建excel2003
@@ -99,7 +99,7 @@ public class ReadExcel {
 	 * @param wb
 	 * @return
 	 */
-	private List<Test> readExcelValue(Workbook wb) {
+	private List<Sdfxx> readExcelValue(Workbook wb) {
 		// 得到第一个shell
 		Sheet sheet = wb.getSheetAt(0);
 		// 得到Excel的行数
@@ -108,14 +108,14 @@ public class ReadExcel {
 		if (totalRows > 1 && sheet.getRow(0) != null) {
 			this.totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
 		}
-		List<Test> userList = new ArrayList<Test>();
+		List<Sdfxx> userList = new ArrayList<Sdfxx>();
 		// 循环Excel行数
 		for (int r = 1; r < totalRows; r++) {
 			Row row = sheet.getRow(r);
 			if (row == null) {
 				continue;
 			}
-			Test user = new Test();
+			Sdfxx sdfxx = new Sdfxx();
 			// 循环Excel的列
 			for (int c = 0; c < this.totalCells; c++) {
 				Cell cell = row.getCell(c);
@@ -123,23 +123,65 @@ public class ReadExcel {
 					if (c == 0) {
 						// 如果是纯数字,比如你写的是25,cell.getNumericCellValue()获得是25.0,通过截取字符串去掉.0获得25
 						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
-							String name = String.valueOf(cell.getNumericCellValue());
-							user.setName(name.substring(0, name.length() - 2 > 0 ? name.length() - 2 : 1));// 名称
+							String sslh = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setSslh(sslh.substring(0, sslh.length() - 2 > 0 ? sslh.length() - 2 : 1));
 						} else {
-							user.setName(cell.getStringCellValue());// 名称
+							sdfxx.setSslh(cell.getStringCellValue());
 						}
 					} else if (c == 1) {
 						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
-							String age = String.valueOf(cell.getNumericCellValue());
-							user.setAge(age.substring(0, age.length() - 2 > 0 ? age.length() - 2 : 1));// 年龄
+							String ssh = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setSsh(ssh.substring(0, ssh.length() - 2 > 0 ? ssh.length() - 2 : 1));
 						} else {
-							user.setAge(cell.getStringCellValue());// 年龄
+							sdfxx.setSsh(cell.getStringCellValue());
+						}
+					} else if (c == 2) {
+						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
+							String sbqm = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setSbqm(sbqm.substring(0, sbqm.length() - 2 > 0 ? sbqm.length() - 2 : 1));
+						} else {
+							sdfxx.setSbqm(cell.getStringCellValue());
+						}
+					} else if (c == 3) {
+						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
+							String sbzm = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setSbzm(sbzm.substring(0, sbzm.length() - 2 > 0 ? sbzm.length() - 2 : 1));
+						} else {
+							sdfxx.setSbzm(cell.getStringCellValue());
+						}
+					} else if (c == 4) {
+						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
+							String sfdj = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setSfdj(sfdj);
+						} else {
+							sdfxx.setSfdj(cell.getStringCellValue());
+						}
+					} else if (c == 5) {
+						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
+							String dbqm = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setDbqm(dbqm.substring(0, dbqm.length() - 2 > 0 ? dbqm.length() - 2 : 1));
+						} else {
+							sdfxx.setDbqm(cell.getStringCellValue());
+						}
+					} else if (c == 6) {
+						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
+							String dbzm = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setDbzm(dbzm.substring(0, dbzm.length() - 2 > 0 ? dbzm.length() - 2 : 1));
+						} else {
+							sdfxx.setDbzm(cell.getStringCellValue());
+						}
+					} else if (c == 7) {
+						if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
+							String dfdj = String.valueOf(cell.getNumericCellValue());
+							sdfxx.setDfdj(dfdj);
+						} else {
+							sdfxx.setDfdj(cell.getStringCellValue());
 						}
 					}
 				}
 			}
 			// 添加到list
-			userList.add(user);
+			userList.add(sdfxx);
 		}
 		return userList;
 	}

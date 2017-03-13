@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.hsxy.bysj.bean.Pager;
 import edu.hsxy.bysj.bean.Sdfxx;
+import edu.hsxy.bysj.bean.Sslxx;
 import edu.hsxy.bysj.bean.Student;
 import edu.hsxy.bysj.domain.DFInfo;
 import edu.hsxy.bysj.domain.SFInfo;
@@ -64,7 +65,26 @@ public class StuController {
 	}
 
 	@RequestMapping("/gostumain")
-	public String goStumain(String stuid, String ssid, Model model, Integer page, Integer size) {
+	public String gostumain(Model model) {
+		List<Sslxx> sslxxs = new ArrayList<Sslxx>();
+		List<String> sslhs = ssRepository.findSslhs();
+		for (String string : sslhs) {
+			Sslxx sslxx = new Sslxx();
+			sslxx.setSslh(string);
+			int ssgs = ssRepository.findSsgs(string);
+			List<String> sshs = ssRepository.findSshsBySslh(string);
+			int ssrs = stuRepository.findSsrs(sshs);
+			sslxx.setSsgs(ssgs);
+			sslxx.setSsrs(ssrs);
+			sslxxs.add(sslxx);
+		}
+		model.addAttribute("sslxxs", sslxxs);
+
+		return "student/stumain";
+	}
+
+	@RequestMapping("/gostussxx")
+	public String gostussxx(String stuid, String ssid, Model model, Integer page, Integer size) {
 		size = 5;
 		ArrayList<Sdfxx> sdfxxs = new ArrayList<Sdfxx>();
 		Page<SFInfo> sfInfos = null;
@@ -111,7 +131,7 @@ public class StuController {
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("sdfxxs", sdfxxs);
-		return "student/stumain";
+		return "student/stussxx";
 	}
 
 	@RequestMapping("/gostugrxx")

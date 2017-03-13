@@ -89,7 +89,7 @@ function goLogin(dlzh,pwd){
 			   }else if(data.sfbz == 0){//系统管理员
 				   location = "<%=path %>/hsxy/sdjf/admin/goxtgly"; 
 			   }else if(data.sfbz == 2){//宿舍管理员
-				   location = "<%=path %>/hsxy/sdjf/"; 
+				   location = "<%=path %>/hsxy/sdjf/ssadmin/gossgly"; 
 			   }else{
 				   alert("密码或学号输入错误！")
 			   }
