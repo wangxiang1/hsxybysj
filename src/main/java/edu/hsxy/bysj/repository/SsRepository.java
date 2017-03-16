@@ -43,4 +43,16 @@ public interface SsRepository extends JpaRepository<SsInfo, Serializable> {
 	@Query("select s.ssid from  SsInfo s where s.sslh = ?1")
 	List<Integer> findSsids(String sslh);
 
+	@Query("select s.ssid from  SsInfo s ")
+	List<Integer> findAllSsids();
+
+	@Query("select s.ssid from  SsInfo s where s.sslh like CONCAT('%',?1,'%')")
+	List<Integer> findAllSsidsBySslh(String sslh);
+
+	@Query("select s.ssid from  SsInfo s where s.ssh like CONCAT('%',?1,'%')")
+	List<Integer> findAllSsidsBySsh(String ssh);
+
+	@Query("select s.ssid from  SsInfo s where s.sslh like CONCAT('%',?1,'%') and s.ssh like CONCAT('%',?2,'%')")
+	List<Integer> findAllSsidsBySslhAndSsh(String sslh, String ssh);
+
 }

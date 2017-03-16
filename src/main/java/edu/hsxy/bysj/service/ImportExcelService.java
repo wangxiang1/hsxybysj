@@ -1,12 +1,16 @@
 package edu.hsxy.bysj.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
-public interface UserService {
+import edu.hsxy.bysj.bean.Sdfxx;
+
+public interface ImportExcelService {
 
 	/**
 	 * 读取excel中的数据,生成list
 	 */
-	String readExcelFile(MultipartFile file);
+	List<Sdfxx> readExcelFile(MultipartFile file);
 
 }

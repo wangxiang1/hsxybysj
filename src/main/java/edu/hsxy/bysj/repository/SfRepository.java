@@ -34,14 +34,14 @@ public interface SfRepository extends JpaRepository<SFInfo, Serializable> {
 	@Query("update SFInfo s set s.sfjf = 1 where s.sfid = ?1")
 	int updateSfjf(int sfid);
 
-	@Query("select s1 from SFInfo s1 where s1.sfjf = ?1")
-	Page<SFInfo> findSfxxBySfjf(String sfjf, Pageable pageable);
+	@Query("select s1 from SFInfo s1 where s1.sfjf = ?1 and s1.ssid in ?2")
+	Page<SFInfo> findSfxxBySfjf(String sfjf, List<Integer> ssids, Pageable pageable);
 
-	@Query("select s1 from SFInfo s1 where s1.date = ?1")
-	Page<SFInfo> findSfxxByDate(String date, Pageable pageable);
+	@Query("select s1 from SFInfo s1 where s1.date = ?1 and s1.ssid in ?2")
+	Page<SFInfo> findSfxxByDate(String date, List<Integer> ssids, Pageable pageable);
 
-	@Query("select s1 from SFInfo s1 where s1.date = ?1 and s1.sfjf = ?2")
-	Page<SFInfo> findSfxxByDateAndSfjf(String date, String sfjf, Pageable pageable);
+	@Query("select s1 from SFInfo s1 where s1.date = ?1 and s1.sfjf = ?2 and s1.ssid in ?3 ")
+	Page<SFInfo> findSfxxByDateAndSfjf(String date, String sfjf, List<Integer> ssids, Pageable pageable);
 
 	@Query("select SUM(s.sf) from SFInfo s where s.date between ?1 and ?2")
 	Double countSf(String qssj, String jzsj);
@@ -54,5 +54,8 @@ public interface SfRepository extends JpaRepository<SFInfo, Serializable> {
 
 	@Query("select SUM(s.ysl) from SFInfo s where s.date between ?1 and ?2 and s.ssid in ?3")
 	Double countYslL(String qssj, String jzsj, List<Integer> ssids);
+
+	@Query("from SFInfo s1 where s1.ssid in ?1")
+	Page<SFInfo> findAllInSsids(List<Integer> ssids, Pageable pageable);
 
 }

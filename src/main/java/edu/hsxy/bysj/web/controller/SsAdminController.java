@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,8 +14,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.hsxy.bysj.bean.Pager;
 import edu.hsxy.bysj.bean.Sdfxx;
@@ -33,6 +38,8 @@ import edu.hsxy.bysj.repository.SsRepository;
 import edu.hsxy.bysj.repository.StuRepository;
 import edu.hsxy.bysj.repository.UserRepository;
 import edu.hsxy.bysj.service.ExportModel;
+import edu.hsxy.bysj.service.ImportExcelService;
+import edu.hsxy.bysj.util.DateUtil;
 import edu.hsxy.bysj.util.MathUtil;
 import edu.hsxy.bysj.util.PageableTools;
 import edu.hsxy.bysj.util.SortDto;
@@ -41,6 +48,8 @@ import edu.hsxy.bysj.util.SortDto;
 @RequestMapping("/hsxy/sdjf/ssadmin")
 @SessionAttributes({ "user", "user" })
 public class SsAdminController {
+	@Autowired
+	private ImportExcelService importExcelService;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -84,27 +93,30 @@ public class SsAdminController {
 		Pageable pageable = PageableTools.basicPage(page, size, "date");
 		Page<SFInfo> sfInfos = null;
 		List<Sdfxx> sdfxxs = new ArrayList<Sdfxx>();
+
+		List<Integer> ssids = new ArrayList<Integer>();
+		if (sslh == "" && ssh == "") {
+			ssids = ssRepository.findAllSsids();
+		} else if (sslh != "" && ssh == "") {
+			ssids = ssRepository.findAllSsidsBySslh(sslh);
+		} else if (sslh == "" && ssh != "") {
+			ssids = ssRepository.findAllSsidsBySsh(ssh);
+		} else if (sslh != "" && ssh != "") {
+			ssids = ssRepository.findAllSsidsBySslhAndSsh(sslh, ssh);
+		}
+
 		if (sfjf == "" && date == "") {
-			sfInfos = sfRepository.findAll(pageable);
+			sfInfos = sfRepository.findAllInSsids(ssids, pageable);
 		} else if (sfjf != "" && date == "") {
-			sfInfos = sfRepository.findSfxxBySfjf(sfjf, pageable);
+			sfInfos = sfRepository.findSfxxBySfjf(sfjf, ssids, pageable);
 		} else if (sfjf == "" && date != "") {
-			sfInfos = sfRepository.findSfxxByDate(date, pageable);
+			sfInfos = sfRepository.findSfxxByDate(date, ssids, pageable);
 		} else if (sfjf != "" && date != "") {
-			sfInfos = sfRepository.findSfxxByDateAndSfjf(date, sfjf, pageable);
+			sfInfos = sfRepository.findSfxxByDateAndSfjf(date, sfjf, ssids, pageable);
 		}
 		for (SFInfo sfInfo : sfInfos.getContent()) {
 			SsInfo ssInfo = null;
-			if (sslh == "" && ssh == "") {
-				ssInfo = ssRepository.findOne(sfInfo.getSsid());
-			} else if (sslh != "" && ssh == "") {
-				ssInfo = ssRepository.findBySslhAndId(sfInfo.getSsid(), sslh);
-			} else if (sslh == "" && ssh != "") {
-				ssInfo = ssRepository.findBySshAndId(sfInfo.getSsid(), ssh);
-			} else if (sslh != "" && ssh != "") {
-				ssInfo = ssRepository.findBySslhAndSshAndId(sslh, ssh, sfInfo.getSsid());
-			}
-
+			ssInfo = ssRepository.findOne(sfInfo.getSsid());
 			if (null != ssInfo) {
 				DFInfo dfInfo = dfRepository.findDfxxBydate(ssInfo.getSsid(), sfInfo.getDate());
 				Sdfxx sdfxx = new Sdfxx();
@@ -254,6 +266,58 @@ public class SsAdminController {
 	@RequestMapping("/loadmodel")
 	public void loadmodel(HttpServletResponse response) {
 		excelModel.exportModel(response);
+	}
+
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean loadFile(@RequestParam(value = "file", required = false) MultipartFile file,
+			HttpServletRequest request, HttpServletResponse response) {
+		boolean a = false;
+		List<Sdfxx> lists = importExcelService.readExcelFile(file);
+		String date = DateUtil.getNow();
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		for (Sdfxx sdfxx : lists) {
+			SFInfo sfInfo = new SFInfo();
+			DFInfo dfInfo = new DFInfo();
+			SsInfo ssInfo = ssRepository.findBySsh(sdfxx.getSsh());
+			if (ssInfo != null) {
+				int ssid = ssInfo.getSsid();
+
+				sfInfo.setSsid(ssid);
+				sfInfo.setSbqm(sdfxx.getSbqm());
+				sfInfo.setSbzm(sdfxx.getSbzm());
+				sfInfo.setSfdj(sdfxx.getSfdj());
+				int ysl = Integer.parseInt(sdfxx.getSbzm()) - Integer.parseInt(sdfxx.getSbqm());
+				sfInfo.setYsl(String.valueOf(ysl));
+				double sf = ysl * Double.parseDouble(sdfxx.getSfdj());
+				sfInfo.setSf(String.valueOf(sf));
+				sfInfo.setYslx("0");
+				sfInfo.setDate(date);
+				sfInfo.setSfjf("0");
+				sfInfo.setCbry(String.valueOf(user.getYhid()));
+				SFInfo sfInfo2 = sfRepository.save(sfInfo);
+
+				dfInfo.setSsid(ssid);
+				dfInfo.setDbqm(sdfxx.getDbqm());
+				dfInfo.setDbzm(sdfxx.getDbzm());
+				dfInfo.setDfdj(sdfxx.getDfdj());
+				int ydl = Integer.parseInt(sdfxx.getDbzm()) - Integer.parseInt(sdfxx.getDbqm());
+				dfInfo.setYdl(String.valueOf(ydl));
+				double df = ydl * Double.parseDouble(sdfxx.getDfdj());
+				dfInfo.setDf(String.valueOf(df));
+				dfInfo.setYdlx("1");
+				dfInfo.setDate(date);
+				dfInfo.setSfjf("0");
+				dfInfo.setCbry(String.valueOf(user.getYhid()));
+				DFInfo dfInfo2 = dfRepository.save(dfInfo);
+
+				if (sfInfo2 != null && dfInfo2 != null) {
+					a = true;
+				}
+			}
+		}
+		return a;
 	}
 
 }

@@ -6,13 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script language="JavaScript" src="<%=path %>/js/model/js/jquery.js"></script>
+<link href="<%=path %>/js/bootstrap-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="<%=path %>/js/bootstrap-dist/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="<%=path %>/js/laypage/laypage.js"></script>
 <script type="text/javascript" src="<%=path %>/js/model/js/jquery.idTabs.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/model/js/select-ui.min.js"></script>
 <link href="<%=path %>/js/bootstrap-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <link href="<%=path %>/js/model/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<%=path %>/js/model/css/select.css" rel="stylesheet" type="text/css" />
+<script src="<%=path %>/js/jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="<%=path %>/js/bootstrap-dist/js/bootstrap.min.js"></script>
 <title>水电费数据表</title>
 </head>
 <body>
@@ -97,7 +100,7 @@
 			    </li>
 			    <li><label>&nbsp;</label><input name="" type="button" class="scbtn" value="查询" onclick="chaxun()"/></li>
 			    <li><label>&nbsp;</label><input name="" type="button" class="scbtn" value="下载模板" onclick="moban()"/></li>
-			    <li><label>&nbsp;</label><input name="" type="button" class="scbtn" value="导入" onclick="daoru()"/></li>
+			    <li><label>&nbsp;</label><button name="" type="button" class="scbtn" data-toggle="modal" data-target="#myModal">导入</button></li>
 			    <li style="margin-left: -8px;"><label>&nbsp;</label><input name="" type="button" class="scbtn" value="导出" onclick="daochu()"/></li>
               </ul>
 		</div>
@@ -149,6 +152,38 @@
 			<div id="page" style="position: relative; float: right;"></div>
 			</div>
 		</div>
+		
+		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	          <span class="sr-only">Close</span>
+	        </button>
+	        <h4 class="modal-title" id="myModalLabel">导入水电数据</h4>
+	      </div>
+	      <div class="modal-body">
+	      <div style="margin-bottom: 10px;">
+	      	<div style="position: relative; float: left;margin-top: 3px;">
+	       		<span id="hj" style="font-size: 18px;"></span>
+	       	</div>
+	       	<div style="position: relative; float: left; margin-left: 30px;">
+	       	  <form enctype="multipart/form-data" id="batchUpload"  action="user/upload" method="post" class="form-horizontal">  
+   				 <input type="file" name="file"  style="width:0px;height:0px;" id="uploadEventFile">
+  				  <input id="uploadEventPath"  disabled="disabled"  type="text" placeholder="请选择excel表" style="border: 1px solid #e6e6e6; height: 26px;width: 200px;" >                                         
+			  	  <button class="btn btn-success btn-xs" id="uploadEventBtn" style="height:26px;"  type="button" >选择文件</button>
+			  </form>
+	       	</div>
+	       </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-success btn-sm"  onclick="user.uploadBtn()" >上传</button>
+	      </div>
+	    </div>
+	  </div>
+    </div>
 
 	</div>
 
@@ -183,7 +218,7 @@ $(document).ready(function(){
 		  skip: true, //是否开启跳页
 		  jump: function(obj,first){
 	    	  if (!first) {//如果不是首页
-	            location = "<%=path %>/hsxy/sdjf/admin/gosdfsj?page="+(obj.curr - 1)+"&sslh="+sslh+"&ssh="+ssh+"&sfjf="+sfjf+"&date="+date;
+	            location = "<%=path %>/hsxy/sdjf/ssadmin/gosdfsj?page="+(obj.curr - 1)+"&sslh="+sslh+"&ssh="+ssh+"&sfjf="+sfjf+"&date="+date;
 			}
 	      }
 		});
@@ -194,14 +229,65 @@ $(document).ready(function(){
 	var ssh = $("#ssh").val();
 	var sfjf = $("#sfjf").val();
 	var date = $("#date").val(); 
-	location = "<%=path %>/hsxy/sdjf/admin/gosdfsj?page=0&sslh="+sslh+"&ssh="+ssh+"&sfjf="+sfjf+"&date="+date;
+	location = "<%=path %>/hsxy/sdjf/ssadmin/gosdfsj?page=0&sslh="+sslh+"&ssh="+ssh+"&sfjf="+sfjf+"&date="+date;
   }
   
   function moban(){
 	  location = "<%=path%>/hsxy/sdjf/ssadmin/loadmodel";
 	   
 	  }
-
+  
+var User = function(){
+	    
+	    this.init = function(){
+	        //模拟上传excel
+	         $("#uploadEventBtn").unbind("click").bind("click",function(){
+	             $("#uploadEventFile").click();
+	         });
+	         $("#uploadEventFile").bind("change",function(){
+	             $("#uploadEventPath").attr("value",$("#uploadEventFile").val());
+	         });
+	         
+	    };
+	    //点击上传按钮
+	    this.uploadBtn = function(){
+	        var uploadEventFile = $("#uploadEventFile").val();
+	        if(uploadEventFile == ''){
+	            alert("请选择excel,再上传");
+	        }else if(uploadEventFile.lastIndexOf(".xls")<0){//可判断以.xls和.xlsx结尾的excel
+	            alert("只能上传Excel文件");
+	        }else{
+	            var url =  '<%=path %>/hsxy/sdjf/ssadmin/upload';
+	            var formData = new FormData($('form')[0]);
+	            user.sendAjaxRequest(url,'POST',formData);
+	        }
+	    };
+	     
+	    this.sendAjaxRequest = function(url,type,data){
+	        $.ajax({
+	            url : url,
+	            type : type,
+	            data : data,
+	            success : function(result) {
+	                if(result){
+	                	alert("上传成功！");
+	                	location = "<%=path %>/hsxy/sdjf/ssadmin/gosdfsj?page=0&sslh=&ssh=&sfjf&date=";
+	                }
+	            },
+	            error : function() {
+	                alert( "excel上传失败");
+	            },
+	            cache : false,
+	            contentType : false,
+	            processData : false
+	        });
+	    };
+	}
+var user;
+$(function(){
+    user = new User();
+    user.init();
+});
 </script>
 </body>
 </html>

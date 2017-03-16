@@ -80,27 +80,29 @@ public class XtAdminController {
 		Pageable pageable = PageableTools.basicPage(page, size, "date");
 		Page<SFInfo> sfInfos = null;
 		List<Sdfxx> sdfxxs = new ArrayList<Sdfxx>();
+		List<Integer> ssids = new ArrayList<Integer>();
+		if (sslh == "" && ssh == "") {
+			ssids = ssRepository.findAllSsids();
+		} else if (sslh != "" && ssh == "") {
+			ssids = ssRepository.findAllSsidsBySslh(sslh);
+		} else if (sslh == "" && ssh != "") {
+			ssids = ssRepository.findAllSsidsBySsh(ssh);
+		} else if (sslh != "" && ssh != "") {
+			ssids = ssRepository.findAllSsidsBySslhAndSsh(sslh, ssh);
+		}
+
 		if (sfjf == "" && date == "") {
-			sfInfos = sfRepository.findAll(pageable);
+			sfInfos = sfRepository.findAllInSsids(ssids, pageable);
 		} else if (sfjf != "" && date == "") {
-			sfInfos = sfRepository.findSfxxBySfjf(sfjf, pageable);
+			sfInfos = sfRepository.findSfxxBySfjf(sfjf, ssids, pageable);
 		} else if (sfjf == "" && date != "") {
-			sfInfos = sfRepository.findSfxxByDate(date, pageable);
+			sfInfos = sfRepository.findSfxxByDate(date, ssids, pageable);
 		} else if (sfjf != "" && date != "") {
-			sfInfos = sfRepository.findSfxxByDateAndSfjf(date, sfjf, pageable);
+			sfInfos = sfRepository.findSfxxByDateAndSfjf(date, sfjf, ssids, pageable);
 		}
 		for (SFInfo sfInfo : sfInfos.getContent()) {
 			SsInfo ssInfo = null;
-			if (sslh == "" && ssh == "") {
-				ssInfo = ssRepository.findOne(sfInfo.getSsid());
-			} else if (sslh != "" && ssh == "") {
-				ssInfo = ssRepository.findBySslhAndId(sfInfo.getSsid(), sslh);
-			} else if (sslh == "" && ssh != "") {
-				ssInfo = ssRepository.findBySshAndId(sfInfo.getSsid(), ssh);
-			} else if (sslh != "" && ssh != "") {
-				ssInfo = ssRepository.findBySslhAndSshAndId(sslh, ssh, sfInfo.getSsid());
-			}
-
+			ssInfo = ssRepository.findOne(sfInfo.getSsid());
 			if (null != ssInfo) {
 				DFInfo dfInfo = dfRepository.findDfxxBydate(ssInfo.getSsid(), sfInfo.getDate());
 				Sdfxx sdfxx = new Sdfxx();
