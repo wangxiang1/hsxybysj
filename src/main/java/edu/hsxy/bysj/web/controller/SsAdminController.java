@@ -72,6 +72,9 @@ public class SsAdminController {
 	@Autowired
 	private ExportModel excelModel;
 
+	// @Autowired
+	// private ExcelService<Sdfxx> excelService;
+
 	@RequestMapping("/gossgly")
 	public String goXtAdmin() {
 		return "ssadmin/ssglyindex";
@@ -320,4 +323,8 @@ public class SsAdminController {
 		return a;
 	}
 
+	@RequestMapping("/exportexcel")
+	public void exportexcel(HttpServletResponse response) {
+		// excelService.export(response, listObject, names);
+	}
 }

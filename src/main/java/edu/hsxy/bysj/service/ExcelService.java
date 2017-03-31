@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExcelService<T> {
 
-	public void export(HttpServletResponse response, List<T> listObject) {
+	public void export(HttpServletResponse response, List<T> listObject, List<String> names) {
 		if (listObject == null || listObject.isEmpty()) {
 			// logger.info("{} is null or listObject.length = 0", listObject);
 			return;
@@ -44,11 +44,15 @@ public class ExcelService<T> {
 		HSSFSheet sheet = wb.createSheet();
 		// 创建表头
 		HSSFRow row1 = sheet.createRow(0);
-		Field[] declaredFields = listObject.get(0).getClass().getDeclaredFields();
-		declaredFields = remove(declaredFields, "serialVersionUID");
-		for (int i = 0; i < declaredFields.length; i++) {
-			String fieldName = declaredFields[i].getName();
-			row1.createCell(i).setCellValue(fieldName);
+		// Field[] declaredFields =
+		// listObject.get(0).getClass().getDeclaredFields();
+		// declaredFields = remove(declaredFields, "serialVersionUID");
+		// for (int i = 0; i < declaredFields.length; i++) {
+		// String fieldName = declaredFields[i].getName();
+		// row1.createCell(i).setCellValue(fieldName);
+		// }
+		for (int i = 0; i < names.size(); i++) {
+			row1.createCell(i).setCellValue(names.get(i));
 		}
 
 		for (int i = 0; i < listObject.size(); i++) {
