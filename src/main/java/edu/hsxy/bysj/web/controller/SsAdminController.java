@@ -37,6 +37,7 @@ import edu.hsxy.bysj.repository.SsAdminRepository;
 import edu.hsxy.bysj.repository.SsRepository;
 import edu.hsxy.bysj.repository.StuRepository;
 import edu.hsxy.bysj.repository.UserRepository;
+import edu.hsxy.bysj.service.ExcelService;
 import edu.hsxy.bysj.service.ExportModel;
 import edu.hsxy.bysj.service.ImportExcelService;
 import edu.hsxy.bysj.util.DateUtil;
@@ -72,8 +73,12 @@ public class SsAdminController {
 	@Autowired
 	private ExportModel excelModel;
 
-	// @Autowired
-	// private ExcelService<Sdfxx> excelService;
+	@Autowired
+	private ExcelService<SFInfo> excelServiceS;
+
+	/*
+	 * @Autowired private ExcelService<DFInfo> excelServiceD;
+	 */
 
 	@RequestMapping("/gossgly")
 	public String goXtAdmin() {
@@ -323,8 +328,22 @@ public class SsAdminController {
 		return a;
 	}
 
-	@RequestMapping("/exportexcel")
-	public void exportexcel(HttpServletResponse response) {
-		// excelService.export(response, listObject, names);
+	@RequestMapping("/exportexcels")
+	public void exportexcels(HttpServletResponse response) {
+		String sfnames[] = { "水费信息id", "宿舍id", "水表起码", "水表止码", "用水类型", "用水量", "水费单价", "水费", "是否缴费", "日期", "测表人员id" };
+		List<SFInfo> listObjects = new ArrayList<SFInfo>();
+		listObjects = sfRepository.findAll();
+		excelServiceS.export(response, listObjects, sfnames);
+
 	}
+
+	/*
+	 * @RequestMapping("/exportexceld") public void
+	 * exportexceld(HttpServletResponse response) { String dfnames[] = {
+	 * "电费信息id", "宿舍id", "电表起码", "电表止码", "用电类型", "用电量", "电费单价", "电费", "是否缴费",
+	 * "日期", "测表人员id" }; List<DFInfo> listObjectd = new ArrayList<DFInfo>();
+	 * listObjectd = dfRepository.findAll(); excelServiceD.export(response,
+	 * listObjectd, dfnames); }
+	 */
+
 }

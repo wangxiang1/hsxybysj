@@ -189,7 +189,6 @@
     	  var glybz = $("#glybz").val();
     	  var glysslh = $("#glysslh").val();
     	  var glysjhm = $("#glysjhm").val();
-    	  alert(glysjhm);
     	  //if(checkGlyDlzh() && checkSsl() && checkTel(2) && checkGlyYhm()){
     	  location = "<%=path%>/hsxy/sdjf/admin/addgly?glydlzh="+glydlzh+"&glyyhm="+glyyhm+"&glysex="+glysex+
     			  "&glybz="+glybz+"&glysslh="+glysslh+"&glysjhm="+glysjhm;

@@ -23,10 +23,16 @@ public class DFInfo {
 	 * 宿舍id
 	 */
 	private int ssid;
+
 	/**
-	 * 日期
+	 * 电表起码
 	 */
-	private String date;
+	private String dbqm;
+	/**
+	 * 电表止码
+	 */
+	private String dbzm;
+
 	/**
 	 * 用电类型
 	 */
@@ -47,14 +53,11 @@ public class DFInfo {
 	 * 是否缴费
 	 */
 	private String sfjf;
+
 	/**
-	 * 电表起码
+	 * 日期
 	 */
-	private String dbqm;
-	/**
-	 * 电表止码
-	 */
-	private String dbzm;
+	private String date;
 	/**
 	 * 查表人员
 	 */

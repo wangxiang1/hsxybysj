@@ -234,8 +234,12 @@ $(document).ready(function(){
   
   function moban(){
 	  location = "<%=path%>/hsxy/sdjf/ssadmin/loadmodel";
-	   
-	  }
+  }
+  
+  function daochu(){
+	  location = "<%=path%>/hsxy/sdjf/ssadmin/exportexcels"; 
+	  location = "<%=path%>/hsxy/sdjf/ssadmin/exportexceld";  
+  }
   
 var User = function(){
 	    

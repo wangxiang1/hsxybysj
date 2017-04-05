@@ -23,10 +23,16 @@ public class SFInfo {
 	 * 宿舍id
 	 */
 	private int ssid;
+
 	/**
-	 * 日期
+	 * 水表起码
 	 */
-	private String date;
+	private String sbqm;
+	/**
+	 * 水表止码
+	 */
+	private String sbzm;
+
 	/**
 	 * 用水类型
 	 */
@@ -47,14 +53,11 @@ public class SFInfo {
 	 * 是否缴费
 	 */
 	private String sfjf;
+
 	/**
-	 * 水表起码
+	 * 日期
 	 */
-	private String sbqm;
-	/**
-	 * 水表止码
-	 */
-	private String sbzm;
+	private String date;
 	/**
 	 * 查表人员
 	 */
