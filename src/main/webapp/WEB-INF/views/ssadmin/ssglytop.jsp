@@ -28,11 +28,6 @@ $(function(){
         
     <ul class="nav">
 	    <li><a href="<%=path %>/hsxy/sdjf/admin/goxtglymain" target="rightFrame" class="selected"><img src="<%=path %>/js/model/images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
-	    <li><a href="<%=path %>/hsxy/sdjf/admin/goxtglymain" target="rightFrame"><img src="<%=path %>/js/model/images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
-	    <li><a href="imglist.html"  target="rightFrame"><img src="<%=path %>/js/model/images/icon03.png" title="模块设计" /><h2>模块设计</h2></a></li>
-	    <li><a href="tools.html"  target="rightFrame"><img src="<%=path %>/js/model/images/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
-	    <li><a href="computer.html" target="rightFrame"><img src="<%=path %>/js/model/images/icon05.png" title="文件管理" /><h2>文件管理</h2></a></li>
-	    <li><a href="tab.html"  target="rightFrame"><img src="<%=path %>/js/model/images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
     </ul>
             
     <div class="topright">    
@@ -43,8 +38,6 @@ $(function(){
 	    </ul>
     <div class="user">
 	    <span>${user.yhm }</span>
-	    <i>消息</i>
-	    <b>5</b>
     </div>    
     
     </div>

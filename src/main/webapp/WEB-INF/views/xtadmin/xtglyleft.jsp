@@ -63,7 +63,7 @@ $(function(){
     <div class="title"><span><img src="<%=path %>/js/model/images/leftico03.png" /></span>公告管理</div>
     <ul class="menuson">
         <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/gggl" target="rightFrame">公告信息</a><i></i></li>
-        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/gggl" target="rightFrame">新增公告</a><i></i></li>
+        <li><cite></cite><a href="<%=path %>/hsxy/sdjf/admin/goaddgg" target="rightFrame">新增公告</a><i></i></li>
     </ul>    
     </dd>
       

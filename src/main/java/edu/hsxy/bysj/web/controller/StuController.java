@@ -17,11 +17,13 @@ import edu.hsxy.bysj.bean.Sdfxx;
 import edu.hsxy.bysj.bean.Sslxx;
 import edu.hsxy.bysj.bean.Student;
 import edu.hsxy.bysj.domain.DFInfo;
+import edu.hsxy.bysj.domain.Ggxx;
 import edu.hsxy.bysj.domain.SFInfo;
 import edu.hsxy.bysj.domain.SsInfo;
 import edu.hsxy.bysj.domain.StuInfo;
 import edu.hsxy.bysj.domain.User;
 import edu.hsxy.bysj.repository.DfRepository;
+import edu.hsxy.bysj.repository.GgRepository;
 import edu.hsxy.bysj.repository.SfRepository;
 import edu.hsxy.bysj.repository.SsRepository;
 import edu.hsxy.bysj.repository.StuRepository;
@@ -48,6 +50,8 @@ public class StuController {
 
 	@Autowired
 	private DfRepository dfRepository;
+	@Autowired
+	private GgRepository ggRepository;
 
 	@RequestMapping("/gostu")
 	public String goStu() {
@@ -80,6 +84,13 @@ public class StuController {
 		}
 		model.addAttribute("sslxxs", sslxxs);
 
+		List<Ggxx> ggxxs = ggRepository.findAll();
+		model.addAttribute("ggxxs", ggxxs);
+
+		int ssgs = ssRepository.ssgs();
+		int stunum = stuRepository.stunum();
+		model.addAttribute("ssgs", ssgs);
+		model.addAttribute("stunum", stunum);
 		return "student/stumain";
 	}
 

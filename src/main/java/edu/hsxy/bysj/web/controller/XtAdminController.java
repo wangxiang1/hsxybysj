@@ -23,12 +23,14 @@ import edu.hsxy.bysj.bean.SsAadmin;
 import edu.hsxy.bysj.bean.Sslxx;
 import edu.hsxy.bysj.bean.Student;
 import edu.hsxy.bysj.domain.DFInfo;
+import edu.hsxy.bysj.domain.Ggxx;
 import edu.hsxy.bysj.domain.SFInfo;
 import edu.hsxy.bysj.domain.SSAdmin;
 import edu.hsxy.bysj.domain.SsInfo;
 import edu.hsxy.bysj.domain.StuInfo;
 import edu.hsxy.bysj.domain.User;
 import edu.hsxy.bysj.repository.DfRepository;
+import edu.hsxy.bysj.repository.GgRepository;
 import edu.hsxy.bysj.repository.SfRepository;
 import edu.hsxy.bysj.repository.SsAdminRepository;
 import edu.hsxy.bysj.repository.SsRepository;
@@ -58,6 +60,8 @@ public class XtAdminController {
 	private DfRepository dfRepository;
 	@Autowired
 	private SsAdminRepository ssAdminRepository;
+	@Autowired
+	private GgRepository ggRepository;
 
 	@RequestMapping("/goxtgly")
 	public String goXtAdmin() {
@@ -72,6 +76,11 @@ public class XtAdminController {
 	@RequestMapping("/goxtglyleft")
 	public String goXtleft() {
 		return "xtadmin/xtglyleft";
+	}
+
+	@RequestMapping("/goaddgg")
+	public String goaddgg() {
+		return "xtadmin/addgg";
 	}
 
 	@RequestMapping("/gosdfsj")
@@ -160,11 +169,30 @@ public class XtAdminController {
 		}
 		model.addAttribute("sslxxs", sslxxs);
 
+		List<Ggxx> ggxxs = ggRepository.findAll();
+		model.addAttribute("ggxxs", ggxxs);
+
+		int ssgs = ssRepository.ssgs();
+		int stunum = stuRepository.stunum();
+		model.addAttribute("ssgs", ssgs);
+		model.addAttribute("stunum", stunum);
 		return "xtadmin/xtglymain";
 	}
 
 	@RequestMapping("/gggl")
-	public String gggl() {
+	public String gggl(Model model, Integer page) {
+		int size = 8;
+		Pageable pageable = PageableTools.basicPage(page, size, "ggrq");
+		Page<Ggxx> ggxxs = ggRepository.findAll(pageable);
+		System.out.println(ggxxs.getContent());
+
+		Pager pager = new Pager();
+		pager.setPage(ggxxs.getNumber());// 页码
+		pager.setSize(ggxxs.getSize());// 页容量
+		pager.setTotalPages(ggxxs.getTotalPages());// 总页数
+
+		model.addAttribute("ggxxs", ggxxs.getContent());
+		model.addAttribute("pager", pager);
 		return "xtadmin/gggl";
 	}
 
@@ -562,5 +590,15 @@ public class XtAdminController {
 	public String mimaqr(String yhid, Model model) {
 		User user = userRepository.findOne(Integer.parseInt(yhid));
 		return user.getPwd();
+	}
+
+	@RequestMapping("/addgg")
+	public String addgg(String ggbt, String ggnr) {
+		Ggxx ggxx = new Ggxx();
+		ggxx.setGgzt(ggbt);
+		ggxx.setGgnr(ggnr);
+		ggxx.setGgrq(DateUtil.getNow());
+		ggRepository.save(ggxx);
+		return "xtadmin/addgg";
 	}
 }

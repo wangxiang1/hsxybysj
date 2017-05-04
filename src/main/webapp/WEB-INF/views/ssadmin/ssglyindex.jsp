@@ -8,7 +8,7 @@
 <title>衡水学院水电缴费管理系统-宿舍管理员</title>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
-  <frame src="<%=path %>/hsxy/sdjf/admin/goxtglytop" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
+  <frame src="<%=path %>/hsxy/sdjf/ssadmin/gossglytop" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
   <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
     <frame src="<%=path %>/hsxy/sdjf/ssadmin/gossglyleft" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
     <frame src="<%=path %>/hsxy/sdjf/ssadmin/gossglymain" name="rightFrame" id="rightFrame" title="rightFrame" />

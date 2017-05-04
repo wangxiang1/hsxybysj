@@ -177,10 +177,10 @@
     	  var stussh = $("#stussh").val();
     	  var stusjhm = $("#stusjhm").val();
     	  
-		  //if(checkStuDlzh() && checkTel(1) && checkXbZy() && checkXbZy() && checkSslSsh() && checkStuYhm()){
+		  //if(checkStuDlzh() && checkTel(1) && checkXbZy() && checkXbZy()){
     	  location = "<%=path%>/hsxy/sdjf/admin/addstu?studlzh="+studlzh+"&stuyhm="+stuyhm+"&stusex="+stusex+
     			  "&stuxl="+stuxl+"&stuxb="+stuxb+"&stuzy="+stuzy+"&stusslh="+stusslh+"&stussh="+stussh+"&stusjhm="+stusjhm;
-    	  //}
+    	 // }
       });
       $("#glyquren").click(function(){
     	  var glydlzh = $("#glydlzh").val();

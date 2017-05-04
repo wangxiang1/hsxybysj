@@ -238,7 +238,7 @@ $(document).ready(function(){
   
   function daochu(){
 	  location = "<%=path%>/hsxy/sdjf/ssadmin/exportexcels"; 
-	  location = "<%=path%>/hsxy/sdjf/ssadmin/exportexceld";  
+	 // location = "<%=path%>/hsxy/sdjf/ssadmin/exportexceld";  
   }
   
 var User = function(){

@@ -26,7 +26,7 @@ public class LoginController {
 	 * @Autowired private ExcelService<User> excelService;
 	 */
 
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String goLogin(HttpServletResponse response) {
 		// MsgSender.sendMsg("18330822332",
 		// "近日武林大乱，系屠龙宝刀重现江湖，血流成河，武林侠士奔走相告，欲求阁下脸皮制成宝盾，以救万民于水火！");

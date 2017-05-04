@@ -60,16 +60,16 @@ text-align: center;
 		   		   <td>宿舍楼</td>
 		   		   <td>宿舍数</td>
 		   		   <td>人数</td>
-		   		   <td>水电费统计图</td>
+		   		  <!--  <td>水电费统计图</td> -->
 		   		</tr>
 		   		<c:forEach items="${sslxxs }" var="s" varStatus="i">
 		   		<tr>
 		   		   <td>${s.sslh }号楼</td>
 		   		   <td>${s.ssgs }间</td>
-		   		   <td>${s.ssrs }个</td>
-		   		   <td>
+		   		   <td>${s.ssrs }人</td>
+		   		  <!--  <td>
 		   		   		<a href="#">查看</a>
-		   		   </td>
+		   		   </td> -->
 		   		</tr>
 		   		</c:forEach>
 		   </table>
@@ -78,27 +78,20 @@ text-align: center;
     <!--mainleft end-->
     <div class="mainright">
 	    <div class="dflist" style="width: 380px; height: 300px;">
-	    	<div class="listtitle"><a href="#" class="more1">更多</a>最新信息</div>    
+	    	<div class="listtitle"><a href="<%=path %>/hsxy/sdjf/admin/gggl" class="more1">更多</a>最新信息</div>    
 		    <ul class="newlist">
-			    <li><a href="#">上海自贸区今日正式挂牌成立</a></li>
-			    <li><a href="#">习近平将访东南亚两国 首次出席APEC峰会</a></li>
-			    <li><a href="#">最高法:谎称炸弹致航班备降者从重追刑责</a></li>
-			    <li><a href="#">华北大部遭遇雾霾天 北京全城陷重污染</a></li>
-			    <li><a href="#">"环保专家"董良杰涉嫌寻衅滋事被刑拘</a></li>
-			    <li><a href="#">中央巡视组：重庆对一把手监督不到位</a></li>
-			    <li><a href="#">囧!悍马没改好成华丽马车(图)</a></li>
-			    <li><a href="#">澳门黄金周加派稽查人员监察出租车违规行为</a></li>
-			    <li><a href="#">香港环境局长吁民众支持政府扩建堆填区</a></li> 
+		       <c:forEach items="${ggxxs }" var="g" varStatus="i">
+				<li>${g.ggzt } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${g.ggrq }</li>
+               </c:forEach>
+			    
 		    </ul>        
 	    </div>
 	    <div class="dflist1" style="width: 380px; height: 300px;">
-		    <div class="listtitle"><a href="#" class="more1">更多</a>信息统计</div>    
+		    <div class="listtitle">信息统计</div>    
 		    <ul class="newlist">
-			    <li><i>会员数：</i>2535462</li>
-			    <li><i>文档数：</i>5546</li>
-			    <li><i>普通文章：</i>2315</li>
-			    <li><i>软件：</i>1585</li>
-			    <li><i>评论数：</i>5342</li>    
+		        <li><i>宿舍楼数：</i>13栋</li>
+			    <li><i>宿舍数：</i>${ssgs }间</li>
+			    <li><i>学生数：</i>${stunum }人</li>    
 		    </ul>        
 	    </div>
     </div>

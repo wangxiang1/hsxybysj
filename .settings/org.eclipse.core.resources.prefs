@@ -5,6 +5,7 @@ encoding//src/main/resources/application.properties=UTF-8
 encoding//src/main/webapp=utf-8
 encoding//src/main/webapp/WEB-INF/views/student/stugrxx.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/test.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/xtadmin/addgg.jsp=UTF-8
 encoding//src/test/java=utf-8
 encoding//src/test/resources=utf-8
 encoding/<project>=UTF-8

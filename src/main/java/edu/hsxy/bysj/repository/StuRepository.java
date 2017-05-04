@@ -23,4 +23,7 @@ public interface StuRepository extends JpaRepository<StuInfo, Serializable> {
 	@Modifying
 	@Query("delete from StuInfo u where u.stuid in ?1 ")
 	int deleteById(List<Integer> ids);
+
+	@Query("select COUNT(*) from StuInfo s")
+	int stunum();
 }
