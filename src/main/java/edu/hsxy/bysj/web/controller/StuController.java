@@ -191,32 +191,36 @@ public class StuController {
 	public String goStusdfxx(String stuid, Model model) {
 		StuInfo stuInfo = stuRepository.findOne(Integer.parseInt(stuid));
 		SsInfo ssInfo = ssRepository.findBySsh(stuInfo.getSsh());
-		SFInfo sfInfo = sfRepository.findSfxx(ssInfo.getSsid()).get(0);
-		DFInfo dfInfo = dfRepository.findDfxx(ssInfo.getSsid()).get(0);
-
+		int s = sfRepository.findSfxx(ssInfo.getSsid()).size();
 		Sdfxx sdfxx = new Sdfxx();
-		sdfxx.setSsid(ssInfo.getSsid());
-		sdfxx.setSslh(ssInfo.getSslh());
-		sdfxx.setSsh(ssInfo.getSsh());
-		sdfxx.setSsye(MathUtil.format(2, Double.parseDouble(ssInfo.getSsye())));
+		if (s != 0) {
+			SFInfo sfInfo = sfRepository.findSfxx(ssInfo.getSsid()).get(0);
+			DFInfo dfInfo = dfRepository.findDfxx(ssInfo.getSsid()).get(0);
 
-		sdfxx.setYslx(sfInfo.getYslx());
-		sdfxx.setSbqm(sfInfo.getSbqm());
-		sdfxx.setSbzm(sfInfo.getSbzm());
-		sdfxx.setYsl(sfInfo.getYsl());
-		sdfxx.setSfdj(sfInfo.getSfdj());
-		sdfxx.setSf(sfInfo.getSf());
-		sdfxx.setScbry(userRepository.findOne(Integer.parseInt(sfInfo.getCbry())).getYhm());
+			sdfxx.setSsid(ssInfo.getSsid());
+			sdfxx.setSslh(ssInfo.getSslh());
+			sdfxx.setSsh(ssInfo.getSsh());
+			sdfxx.setSsye(MathUtil.format(2, Double.parseDouble(ssInfo.getSsye())));
 
-		sdfxx.setDate(sfInfo.getDate().substring(0, 19));
+			sdfxx.setYslx(sfInfo.getYslx());
+			sdfxx.setSbqm(sfInfo.getSbqm());
+			sdfxx.setSbzm(sfInfo.getSbzm());
+			sdfxx.setYsl(sfInfo.getYsl());
+			sdfxx.setSfdj(sfInfo.getSfdj());
+			sdfxx.setSf(sfInfo.getSf());
+			sdfxx.setScbry(userRepository.findOne(Integer.parseInt(sfInfo.getCbry())).getYhm());
 
-		sdfxx.setYdlx(dfInfo.getYdlx());
-		sdfxx.setDbqm(dfInfo.getDbqm());
-		sdfxx.setDbzm(dfInfo.getDbzm());
-		sdfxx.setYdl(dfInfo.getYdl());
-		sdfxx.setDfdj(dfInfo.getDfdj());
-		sdfxx.setDf(dfInfo.getDf());
-		sdfxx.setDcbry(userRepository.findOne(Integer.parseInt(dfInfo.getCbry())).getYhm());
+			sdfxx.setDate(sfInfo.getDate().substring(0, 19));
+
+			sdfxx.setYdlx(dfInfo.getYdlx());
+			sdfxx.setDbqm(dfInfo.getDbqm());
+			sdfxx.setDbzm(dfInfo.getDbzm());
+			sdfxx.setYdl(dfInfo.getYdl());
+			sdfxx.setDfdj(dfInfo.getDfdj());
+			sdfxx.setDf(dfInfo.getDf());
+			sdfxx.setDcbry(userRepository.findOne(Integer.parseInt(dfInfo.getCbry())).getYhm());
+
+		}
 
 		List<String> dates = sfRepository.findAllDate(ssInfo.getSsid());
 		model.addAttribute("dates", dates);
@@ -265,47 +269,49 @@ public class StuController {
 		SsInfo ssInfo = ssRepository.findBySsh(stuInfo.getSsh());
 		SFInfo sfInfo = null;
 		DFInfo dfInfo = null;
-		if (null == date) {
-			sfInfo = sfRepository.findSfxx(ssInfo.getSsid()).get(0);
-			dfInfo = dfRepository.findDfxx(ssInfo.getSsid()).get(0);
-		} else {
-			sfInfo = sfRepository.findSfxxBydate(ssInfo.getSsid(), date);
-			dfInfo = dfRepository.findDfxxBydate(ssInfo.getSsid(), date);
-		}
+		int s = sfRepository.findSfxx(ssInfo.getSsid()).size();
 		Sdfxx sdfxx = new Sdfxx();
-		sdfxx.setSsid(ssInfo.getSsid());
-		sdfxx.setSslh(ssInfo.getSslh());
-		sdfxx.setSsh(ssInfo.getSsh());
-		sdfxx.setSsye(MathUtil.format(2, Double.parseDouble(ssInfo.getSsye())));
+		if (s != 0) {
+			if (null == date) {
+				sfInfo = sfRepository.findSfxx(ssInfo.getSsid()).get(0);
+				dfInfo = dfRepository.findDfxx(ssInfo.getSsid()).get(0);
+			} else {
+				sfInfo = sfRepository.findSfxxBydate(ssInfo.getSsid(), date);
+				dfInfo = dfRepository.findDfxxBydate(ssInfo.getSsid(), date);
+			}
+			sdfxx.setSsid(ssInfo.getSsid());
+			sdfxx.setSslh(ssInfo.getSslh());
+			sdfxx.setSsh(ssInfo.getSsh());
+			sdfxx.setSsye(MathUtil.format(2, Double.parseDouble(ssInfo.getSsye())));
 
-		sdfxx.setSfid(sfInfo.getSfid());
-		sdfxx.setYslx(sfInfo.getYslx());
-		sdfxx.setSbqm(sfInfo.getSbqm());
-		sdfxx.setSbzm(sfInfo.getSbzm());
-		sdfxx.setYsl(sfInfo.getYsl());
-		sdfxx.setSfdj(sfInfo.getSfdj());
-		sdfxx.setSf(sfInfo.getSf());
-		sdfxx.setScbry(userRepository.findOne(Integer.parseInt(sfInfo.getCbry())).getYhm());
-		sdfxx.setSsfjf(sfInfo.getSfjf());
+			sdfxx.setSfid(sfInfo.getSfid());
+			sdfxx.setYslx(sfInfo.getYslx());
+			sdfxx.setSbqm(sfInfo.getSbqm());
+			sdfxx.setSbzm(sfInfo.getSbzm());
+			sdfxx.setYsl(sfInfo.getYsl());
+			sdfxx.setSfdj(sfInfo.getSfdj());
+			sdfxx.setSf(sfInfo.getSf());
+			sdfxx.setScbry(userRepository.findOne(Integer.parseInt(sfInfo.getCbry())).getYhm());
+			sdfxx.setSsfjf(sfInfo.getSfjf());
 
-		sdfxx.setDate(sfInfo.getDate().substring(0, 19));
+			sdfxx.setDate(sfInfo.getDate().substring(0, 19));
 
-		sdfxx.setDfid(dfInfo.getDfid());
-		sdfxx.setYdlx(dfInfo.getYdlx());
-		sdfxx.setDbqm(dfInfo.getDbqm());
-		sdfxx.setDbzm(dfInfo.getDbzm());
-		sdfxx.setYdl(dfInfo.getYdl());
-		sdfxx.setDfdj(dfInfo.getDfdj());
-		sdfxx.setDf(dfInfo.getDf());
-		sdfxx.setDcbry(userRepository.findOne(Integer.parseInt(dfInfo.getCbry())).getYhm());
-		sdfxx.setDsfjf(dfInfo.getSfjf());
+			sdfxx.setDfid(dfInfo.getDfid());
+			sdfxx.setYdlx(dfInfo.getYdlx());
+			sdfxx.setDbqm(dfInfo.getDbqm());
+			sdfxx.setDbzm(dfInfo.getDbzm());
+			sdfxx.setYdl(dfInfo.getYdl());
+			sdfxx.setDfdj(dfInfo.getDfdj());
+			sdfxx.setDf(dfInfo.getDf());
+			sdfxx.setDcbry(userRepository.findOne(Integer.parseInt(dfInfo.getCbry())).getYhm());
+			sdfxx.setDsfjf(dfInfo.getSfjf());
 
-		double zj = Double.parseDouble(sfInfo.getSf()) + Double.parseDouble(dfInfo.getDf());
-		sdfxx.setZj(MathUtil.format(2, zj));
+			double zj = Double.parseDouble(sfInfo.getSf()) + Double.parseDouble(dfInfo.getDf());
+			sdfxx.setZj(MathUtil.format(2, zj));
+		}
 
 		List<String> dates = sfRepository.findAllDate(ssInfo.getSsid());
 		model.addAttribute("dates", dates);
-
 		model.addAttribute("sdfxx", sdfxx);
 		return "student/stujf";
 	}
